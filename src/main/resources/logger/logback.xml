@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<property name="application-name" value="product-service"
+		scope="context" />
+	<property name="LOG_FILE" value="LogFile" />
+
+	<appender name="Stdout"	class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{YYYY-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+				%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/logs/app.log</file>
+		<encoder>
+			<pattern>
+				%d{YYYY-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+				%msg%n
+			</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>1GB</maxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<logger	name="com.tutorialsbuddy.logging.example.transaction.impl.TransactionServiceImpl"
+		level="ERROR">
+		<appender-ref ref="RollingFile" />
+	</logger>
+
+	<root level="DEBUG">
+		<appender-ref ref="Stdout" />
+	</root>
+
+</configuration>

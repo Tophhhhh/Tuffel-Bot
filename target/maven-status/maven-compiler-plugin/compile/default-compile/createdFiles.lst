@@ -1,0 +1,12 @@
+de\test\message\ReactRolesCommand.class
+de\test\database\SQLManager.class
+de\test\moveall\MoveAllListener.class
+de\test\bestofmonth\MessageOfMonth.class
+de\test\database\LiteSQL.class
+de\test\listener\CommandListener.class
+de\test\DiscordBot.class
+de\test\clear\ClearMessageListener.class
+de\test\listener\ReactionListener.class
+de\test\tempvoicechannel\TempVoiceListener.class
+de\test\message\PreviewCommand.class
+de\test\verify\VerifyListener.class
