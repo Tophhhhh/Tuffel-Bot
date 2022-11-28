@@ -29,7 +29,6 @@ public class ServiceImpl implements IService {
     private static final Logger logger = LoggerFactory.getLogger(ServiceImpl.class);
 
     /**
-     * 
      * Set up new Events
      * 
      * @return events
@@ -61,16 +60,6 @@ public class ServiceImpl implements IService {
 	    for (Object event : events) {
 		builder.addEventListeners(event);
 	    }
-
-//			// Listener
-//			builder.addEventListeners(new TempVoiceListener());
-//			builder.addEventListeners(new RoleListener());
-//
-//			// Slash
-//			builder.addEventListeners(new MessageOfMonthListener());
-//			builder.addEventListeners(new VerifyListener());
-////			builder.addEventListeners(new ClearMessageListener());
-//			builder.addEventListeners(new MoveAllListener());
 	    return builder.build();
 	} catch (LoginException e) {
 	    logger.error(e.getMessage(), e);

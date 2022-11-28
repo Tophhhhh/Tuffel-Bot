@@ -113,8 +113,7 @@ public class VerifyListener extends ListenerAdapter {
 	EmbedBuilder eb = new EmbedBuilder();
 	eb.setColor(Color.red);
 	eb.setTitle("Verifiziere dich!");
-	eb.setDescription(
-		"Um alle Channel sehen zu können und dich in dem Server frei bewegen zu können musst du Verifiziert sein!");
+	eb.setDescription("Um alle Channel sehen zu können und dich in dem Server frei bewegen zu können musst du Verifiziert sein!");
 	eb.addField("Wie?", "Drücke auf den Butten unter der Nachricht!", false);
 	eb.setFooter(String.format("Created by %s", name), iconUrl);
 	return eb.build();

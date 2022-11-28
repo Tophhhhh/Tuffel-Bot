@@ -24,24 +24,25 @@ public class MoveAllListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if (event.getName().equals("moveall")) {
-	    try {
-		Member member = event.getMember();
-		AudioChannelUnion acu = member.getVoiceState().getChannel();
-		List<Member> members = acu.getMembers();
-		long channelId = event.getOption("voiceid").getAsLong();
-		for (Member m : members) {
-		    event.getGuild().moveVoiceMember(m, event.getGuild().getVoiceChannelById(channelId)).queue();
-		}
-		event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(),
-			member.getAsMention())).queue();
-	    } catch (NumberFormatException e) {
-		LOGGER.error(e.getMessage(), e);
-		event.reply("Bitte gib eine Gültige id ein!").setEphemeral(true).queue();
-	    } catch (Exception e) {
-		LOGGER.error(e.getMessage(), e);
-		event.reply("Etwas ist schief gelaufen!").setEphemeral(true).queue();
+	if (!event.getName().equals("moveall")) {
+	    return;
+	}
+	try {
+	    Member member = event.getMember();
+	    AudioChannelUnion acu = member.getVoiceState().getChannel();
+	    List<Member> members = acu.getMembers();
+	    long channelId = event.getOption("voiceid").getAsLong();
+	    for (Member m : members) {
+		event.getGuild().moveVoiceMember(m, event.getGuild().getVoiceChannelById(channelId)).queue();
 	    }
+	    event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(),
+		    member.getAsMention())).queue();
+	} catch (NumberFormatException e) {
+	    LOGGER.error(e.getMessage(), e);
+	    event.reply("Bitte gib eine Gültige id ein!").setEphemeral(true).queue();
+	} catch (Exception e) {
+	    LOGGER.error(e.getMessage(), e);
+	    event.reply("Etwas ist schief gelaufen!").setEphemeral(true).queue();
 	}
     }
 }

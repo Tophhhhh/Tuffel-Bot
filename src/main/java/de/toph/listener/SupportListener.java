@@ -22,7 +22,7 @@ public class SupportListener extends ListenerAdapter{
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if (!event.getName().equals("modmail")) {
+	if (!event.getName().equals("support")) {
 	    return;
 	}
 	TextInput subject = TextInput.create("subject", "Subject", TextInputStyle.SHORT)
@@ -60,7 +60,6 @@ public class SupportListener extends ListenerAdapter{
 	User user = event.getUser();
 	
 	Category cat = event.getGuild().getCategoryById(1046420663860215839l);
-	cat.createTextChannel(subject)
-	.queue();
+	cat.createTextChannel(subject).queue();
     }
 }
