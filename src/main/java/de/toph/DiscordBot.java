@@ -28,9 +28,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 /**
  * 
- * @author Toph
- * 
- *         Discord Bot
+ * @author Toph Discord Bot
  */
 public class DiscordBot {
 
@@ -66,8 +64,7 @@ public class DiscordBot {
 	service = new ServiceImpl();
 	LiteSQL.connect();
 
-	builder = JDABuilder.createDefault(args[0]).enableIntents(GatewayIntent.GUILD_MEMBERS,
-		GatewayIntent.MESSAGE_CONTENT);
+	builder = JDABuilder.createDefault(args[0]).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT);
 //		JDABuilder builder = JDABuilder.create(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);

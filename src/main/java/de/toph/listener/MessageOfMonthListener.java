@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Message.MentionType;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -66,14 +67,17 @@ public class MessageOfMonthListener extends ListenerAdapter {
 	Role role = guild.getRoleById(DatabaseUtils.getRole(guild.getIdLong(), "Special"));
 	guild.addRoleToMember(mem, role).queue();
 
+	User mention = mostReaction.getMentions().getUsers().get(0);
+	
 	EmbedBuilder eb = new EmbedBuilder();
 	eb.setColor(Color.CYAN);
-	eb.setTitle("Nachricht des Monats! ");
+	eb.setTitle("Nachricht des Monats!");
 	eb.setDescription("Jeden Monat wird die Nachricht mit den Meisten Reaktion angezeigt!");
 	eb.addField("Anzahl Nachrichten", String.format("Es waren %s Nachrichten letzten Monat", messages.size()), false);
 	if (mostReaction != null) {
 	    eb.addField("Anzahl Reactions", String.format("Auf der Nachricht waren %s Reaktionen letzten Monat", max), false);
 	    eb.addField("Nachricht des Monats", mostReaction.getContentRaw(), false);
+	    eb.setImage(mention.getAvatarUrl());
 	}
 	eb.setFooter(String.format("Created by %s", guild.getName()), guild.getIconUrl());
 	event.replyEmbeds(eb.build()).queue();
