@@ -26,7 +26,9 @@ public class ClearMessageListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if ("clear".equals(event.getName())) {
+	if (!"clear".equals(event.getName())) {
+	    return;
+	}
 	    int amount = event.getOption("amount").getAsInt();
 	    if (amount > 200) {
 		event.reply("Der eingegebene Wert ist zu Groß! Wert wurde auf 200 gesetzt").queue();
@@ -35,8 +37,6 @@ public class ClearMessageListener extends ListenerAdapter {
 
 	    event.getChannel().purgeMessages(get(event.getChannel(), amount));
 	    event.reply(amount + " Message(s) deleted!").complete().deleteOriginal().queueAfter(3, TimeUnit.SECONDS);
-	    return;
-	}
     }
 
     public List<Message> get(MessageChannel channel, int amount) {
