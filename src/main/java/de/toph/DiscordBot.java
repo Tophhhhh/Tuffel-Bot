@@ -41,6 +41,12 @@ public class DiscordBot {
     private JDA jda;
 
     private IService service;
+    
+    private Config config;
+    
+    public DiscordBot() {
+	config = new Config();
+    }
 
     /**
      * the instance of Discord bot
@@ -64,7 +70,7 @@ public class DiscordBot {
 	service = new ServiceImpl();
 	LiteSQL.connect();
 
-	builder = JDABuilder.createDefault(args[0]).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT);
+	builder = JDABuilder.createDefault(config.getKey()).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT);
 //		JDABuilder builder = JDABuilder.create(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);
