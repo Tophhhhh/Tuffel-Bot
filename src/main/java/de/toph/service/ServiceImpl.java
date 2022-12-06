@@ -12,7 +12,6 @@ import de.toph.DiscordBot;
 import de.toph.listener.ClearMessageListener;
 import de.toph.listener.MessageOfMonthListener;
 import de.toph.listener.MoveAllListener;
-import de.toph.listener.RandomMessages;
 import de.toph.listener.RoleListener;
 import de.toph.listener.TempVoiceListener;
 import de.toph.listener.VerifyListener;
@@ -45,7 +44,6 @@ public class ServiceImpl implements IService {
 	events.add(new MoveAllListener());
 	events.add(new ClearMessageListener());
 
-	events.add(new RandomMessages());
 	return events;
     }
 

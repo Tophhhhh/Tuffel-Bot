@@ -11,7 +11,9 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LiteSQL {
+import de.toph.Config;
+
+public class LiteSQL{
 
     private static Logger logger = LoggerFactory.getLogger(LiteSQL.class);
 
@@ -21,7 +23,7 @@ public class LiteSQL {
     public static void connect() {
 	con = null;
 	try {
-	    File file = new File("datenbank.db");
+	    File file = new File(Config.getDbPath());
 	    if (!file.exists()) {
 		file.createNewFile();
 	    }

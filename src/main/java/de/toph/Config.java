@@ -14,8 +14,8 @@ public class Config {
 
     private static Logger logger = LoggerFactory.getLogger(Config.class);
     
-    private String key;
-    private String dbPath;
+    private static String key;
+    private static String dbPath;
     
     public Config() {
 	try(FileReader fr = new FileReader(new File("src/main/resources/config/application.properties"))) {
@@ -23,7 +23,6 @@ public class Config {
 	    prop.load(fr);
 	    key = prop.getProperty("bot.token");
 	    dbPath = prop.getProperty("db.connection");
-	    
 	} catch (IOException e) {
 	    logger.error(e.getMessage(), e);
 	}
@@ -31,21 +30,13 @@ public class Config {
 
     // K E Y
     
-    public String getKey() {
+    public static String getKey() {
         return StringUtil.emtpyStringIfNull(key);
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     // D B - P A T H
     
-    public String getDbPath() {
+    public static String getDbPath() {
         return dbPath;
-    }
-
-    public void setDbPath(String dbPath) {
-        this.dbPath = dbPath;
     }
 }
