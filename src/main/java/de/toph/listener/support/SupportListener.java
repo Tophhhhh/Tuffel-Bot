@@ -1,7 +1,8 @@
-package de.toph.listener;
+package de.toph.listener.support;
 
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.channel.concrete.Category;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -20,11 +21,14 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
  */
 public class SupportListener extends ListenerAdapter{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SupportListener.class);
+    
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if (!event.getName().equals("support")) {
+	if (!"support".equals(event.getName())) {
 	    return;
 	}
+	
 	TextInput subject = TextInput.create("subject", "Subject", TextInputStyle.SHORT)
 		.setPlaceholder("Subject of this ticket")
 		.setMinLength(10)
@@ -50,16 +54,10 @@ public class SupportListener extends ListenerAdapter{
 	    String subject = event.getValue("subject").getAsString();
 	    String body = event.getValue("body").getAsString();
 
-	    createSupportTicket(event, subject, body);
+	    LOGGER.debug(subject);
+	    LOGGER.debug(body);
 
 	    event.reply("Thanks for your request!").setEphemeral(true).queue();
 	}
-    }
-    
-    private void createSupportTicket(ModalInteractionEvent event, String subject, String body) {
-	User user = event.getUser();
-	
-	Category cat = event.getGuild().getCategoryById(1046420663860215839l);
-	cat.createTextChannel(subject).queue();
     }
 }

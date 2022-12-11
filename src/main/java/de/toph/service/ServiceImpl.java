@@ -17,6 +17,7 @@ import de.toph.listener.TempVoiceListener;
 import de.toph.listener.VerifyListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * 
@@ -32,8 +33,8 @@ public class ServiceImpl implements IService {
      * 
      * @return events
      */
-    private List<Object> getEvents() {
-	List<Object> events = new ArrayList<>();
+    private List<ListenerAdapter> getEvents() {
+	List<ListenerAdapter> events = new ArrayList<>();
 	// L I S T E N E R
 	events.add(new TempVoiceListener());
 	events.add(new RoleListener());
@@ -53,9 +54,9 @@ public class ServiceImpl implements IService {
     @Override
     public JDA getBuilderWithEventListener() {
 	try {
-	    List<Object> events = getEvents();
+	    List<ListenerAdapter> events = getEvents();
 	    JDABuilder builder = DiscordBot.getInstance().getBuilder();
-	    for (Object event : events) {
+	    for (ListenerAdapter event : events) {
 		builder.addEventListeners(event);
 	    }
 	    return builder.build();

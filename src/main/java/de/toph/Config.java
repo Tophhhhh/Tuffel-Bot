@@ -14,8 +14,8 @@ public class Config {
 
     private static Logger logger = LoggerFactory.getLogger(Config.class);
     
-    private static String key;
-    private static String dbPath;
+    private String key;
+    private String dbPath;
     
     public Config() {
 	try(FileReader fr = new FileReader(new File("src/main/resources/config/application.properties"))) {
@@ -30,13 +30,13 @@ public class Config {
 
     // K E Y
     
-    public static String getKey() {
+    public String getKey() {
         return StringUtil.emtpyStringIfNull(key);
     }
 
     // D B - P A T H
     
-    public static String getDbPath() {
+    public String getDbPath() {
         return dbPath;
     }
 }

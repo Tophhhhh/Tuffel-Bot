@@ -51,6 +51,7 @@ public class VerifyListener extends ListenerAdapter {
 	    Guild guild = event.getGuild();
 	    String name = guild.getName();
 	    String iconUrl = guild.getIconUrl();
+	    
 
 	    event.getChannel().sendMessageEmbeds(verifyEmbeded(name, iconUrl))
 		    .addActionRow(Button.primary("Verify", Emoji.fromUnicode("U+2705"))).queue();

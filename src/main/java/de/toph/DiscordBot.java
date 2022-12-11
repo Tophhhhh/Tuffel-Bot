@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
@@ -42,6 +43,12 @@ public class DiscordBot {
 
     private IService service;
     
+    private Config config;
+    
+    public DiscordBot() {
+	config = new Config();
+    }
+    
     /**
      * the instance of Discord bot
      * 
@@ -54,7 +61,7 @@ public class DiscordBot {
 	}
 	return INSTANCE;
     }
-
+    
     /**
      * execute Discord Bot
      * 
@@ -62,10 +69,9 @@ public class DiscordBot {
      */
     public void execute(String[] args) {
 	service = new ServiceImpl();
-	LiteSQL.connect();
+	LiteSQL.connect(config.getDbPath());
 
-	builder = JDABuilder.createDefault(Config.getKey()).enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT);
-//		JDABuilder builder = JDABuilder.create(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS);
+	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);
 
@@ -93,9 +99,6 @@ public class DiscordBot {
 		.addOption(OptionType.STRING, "voiceid", "ID from voicechannel", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
-	commandlist.add(
-		Commands.slash("love", "Spread some Love").addOption(OptionType.USER, "user", "Mention User", true));
-
 	// CONTEXT COMMANDS
 	commandlist.add(Commands.context(Command.Type.USER, "Verify")
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
@@ -111,7 +114,6 @@ public class DiscordBot {
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	    try {
 		while ((line = reader.readLine()) != null) {
-
 		    if (line.equalsIgnoreCase("exit")) {
 			if (jda != null) {
 			    jda.shutdown();
@@ -123,12 +125,10 @@ public class DiscordBot {
 		    } else {
 			System.out.println("Use 'exit' to shutdown.");
 		    }
-
 		}
 	    } catch (IOException e) {
 		LOGGER.error(e.getMessage(), e);
 	    }
-
 	}).start();
     }
 
@@ -142,29 +142,11 @@ public class DiscordBot {
     }
 
     /**
-     * Set Builder
-     * 
-     * @param builder
-     */
-    public void setBuilder(JDABuilder builder) {
-	this.builder = builder;
-    }
-
-    /**
      * get Jda
      * 
      * @return jda
      */
     public JDA getJda() {
 	return jda;
-    }
-
-    /**
-     * set Jda
-     * 
-     * @param jda
-     */
-    public void setJda(JDA jda) {
-	this.jda = jda;
     }
 }

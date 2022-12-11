@@ -61,13 +61,18 @@ public class MessageOfMonthListener extends ListenerAdapter {
 	}
 
 	// Get a special role
-	IMentionable user = mostReaction.getMentions().getMentions(MentionType.USER).get(0);
-	Member mem = guild.getMemberById(user.getIdLong());
+	List<IMentionable> mentions = mostReaction.getMentions().getMentions(MentionType.USER);
+	if (!mentions.isEmpty()) {
+	    IMentionable user = mentions.get(0);
+	    Member mem = guild.getMemberById(user.getIdLong());
+	    Role role = guild.getRoleById(DatabaseUtils.getRole(guild.getIdLong(), "Special"));
+	    if (role != null) {
+		guild.addRoleToMember(mem, role).queue();
+	    }
+	}
 
-	Role role = guild.getRoleById(DatabaseUtils.getRole(guild.getIdLong(), "Special"));
-	guild.addRoleToMember(mem, role).queue();
-
-	User mention = mostReaction.getMentions().getUsers().get(0);
+	List<User> users = mostReaction.getMentions().getUsers();
+	User mention = users.isEmpty() ? null : users.get(0);
 	
 	EmbedBuilder eb = new EmbedBuilder();
 	eb.setColor(Color.CYAN);
@@ -77,7 +82,9 @@ public class MessageOfMonthListener extends ListenerAdapter {
 	if (mostReaction != null) {
 	    eb.addField("Anzahl Reactions", String.format("Auf der Nachricht waren %s Reaktionen letzten Monat", max), false);
 	    eb.addField("Nachricht des Monats", mostReaction.getContentRaw(), false);
-	    eb.setImage(mention.getAvatarUrl());
+	    if(mention != null) {
+		eb.setImage(mention.getAvatarUrl());
+	    }
 	}
 	eb.setFooter(String.format("Created by %s", guild.getName()), guild.getIconUrl());
 	event.replyEmbeds(eb.build()).queue();
