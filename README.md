@@ -8,7 +8,12 @@
 </details>
 
 # Commands
+| Command | Description |
+|---|---|
+| /dummy | only a dummy|
+
 
 # Additional
 
 # Social Links
+**Work in progress**
