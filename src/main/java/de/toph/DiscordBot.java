@@ -1,8 +1,5 @@
 package de.toph;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -76,8 +73,6 @@ public class DiscordBot {
 
 	jda = service.getBuilderWithEventListener();
 	jda.updateCommands().addCommands(commands()).queue();
-
-	shutdown();
     }
 
     /**
@@ -98,33 +93,6 @@ public class DiscordBot {
 	// CONTEXT COMMANDS
 
 	return commandlist;
-    }
-
-    /**
-     * shutdown method to shutdown the bot
-     */
-    private void shutdown() {
-	new Thread(() -> {
-	    String line = "";
-	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	    try {
-		while ((line = reader.readLine()) != null) {
-		    if (line.equalsIgnoreCase("exit")) {
-			if (jda != null) {
-			    jda.shutdown();
-			    LiteSQL.disconnect();
-			    System.out.println("Bot shutdown");
-			    reader.close();
-			    System.exit(0);
-			}
-		    } else {
-			System.out.println("Use 'exit' to shutdown.");
-		    }
-		}
-	    } catch (IOException e) {
-		LOGGER.error(e.getMessage(), e);
-	    }
-	}).start();
     }
 
     /**
