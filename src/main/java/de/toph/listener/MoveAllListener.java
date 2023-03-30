@@ -24,7 +24,7 @@ public class MoveAllListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if (!event.getName().equals("moveall")) {
+	if (!event.getName().equals("move all")) {
 	    return;
 	}
 	try {
