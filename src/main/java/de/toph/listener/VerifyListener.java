@@ -15,8 +15,6 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -56,26 +54,6 @@ public class VerifyListener extends ListenerAdapter {
 	    event.getChannel().sendMessageEmbeds(verifyEmbeded(name, iconUrl))
 		    .addActionRow(Button.primary("Verify", Emoji.fromUnicode("U+2705"))).queue();
 	    event.getChannel().deleteMessageById(event.getMessageId()).queue();
-	}
-    }
-
-    @Override
-    public void onUserContextInteraction(UserContextInteractionEvent event) {
-	if (event.getName().equals("Verify")) {
-	    String name = event.getGuild().getName();
-	    String iconUrl = event.getGuild().getIconUrl();
-	    event.replyEmbeds(verifyEmbeded(name, iconUrl))
-		    .addActionRow(Button.primary("Verify", Emoji.fromUnicode("U+2705"))).queue();
-	}
-    }
-
-    @Override
-    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if ("verify".equals(event.getName())) {
-	    String name = event.getGuild().getName();
-	    String iconUrl = event.getGuild().getIconUrl();
-	    event.replyEmbeds(verifyEmbeded(name, iconUrl))
-		    .addActionRow(Button.primary("Verify", Emoji.fromUnicode("U+2705"))).queue();
 	}
     }
 

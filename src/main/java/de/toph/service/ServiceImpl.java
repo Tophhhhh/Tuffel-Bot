@@ -9,12 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.toph.DiscordBot;
-import de.toph.listener.ClearMessageListener;
-import de.toph.listener.MessageOfMonthListener;
 import de.toph.listener.MoveAllListener;
 import de.toph.listener.RoleListener;
 import de.toph.listener.TempVoiceListener;
 import de.toph.listener.VerifyListener;
+import de.toph.listener.support.SupportListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -40,11 +39,10 @@ public class ServiceImpl implements IService {
 	events.add(new RoleListener());
 
 	// S L A S H
-	events.add(new MessageOfMonthListener());
 	events.add(new VerifyListener());
 	events.add(new MoveAllListener());
-	events.add(new ClearMessageListener());
-
+	events.add(new SupportListener());
+	
 	return events;
     }
 

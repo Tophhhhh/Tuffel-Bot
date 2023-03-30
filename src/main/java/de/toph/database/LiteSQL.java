@@ -44,7 +44,7 @@ public class LiteSQL{
 		System.out.println("Verbindung zur Datenbank getrennt.");
 	    }
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    logger.error(e.getMessage(), e);
 	}
     }
 
@@ -52,7 +52,7 @@ public class LiteSQL{
 	try {
 	    statement.execute(sql);
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    logger.error(e.getMessage(), e);
 	}
     }
 
@@ -60,7 +60,7 @@ public class LiteSQL{
 	try {
 	    return statement.executeQuery(sql);
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    logger.error(e.getMessage(), e);
 	}
 	return null;
     }

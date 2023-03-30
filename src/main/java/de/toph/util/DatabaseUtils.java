@@ -16,7 +16,7 @@ public class DatabaseUtils {
 	Long rid = null;
 	StringBuilder sb = new StringBuilder();
 	sb.append("SELECT DISTINCT * FROM roles ");
-	sb.append("WHERE guildid = " + guildId + " AND rolename like '" + role + "'");
+	sb.append(String.format("WHERE guildid = %s AND rolename like '%s'", guildId, role));
 	ResultSet rs = LiteSQL.onQuery(sb.toString());
 	try {
 	    if (rs.next()) {

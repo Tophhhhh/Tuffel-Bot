@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -47,6 +46,7 @@ public class DiscordBot {
     
     public DiscordBot() {
 	config = new Config();
+	service = new ServiceImpl();
     }
     
     /**
@@ -68,7 +68,6 @@ public class DiscordBot {
      * @param args
      */
     public void execute(String[] args) {
-	service = new ServiceImpl();
 	LiteSQL.connect(config.getDbPath());
 
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
@@ -76,7 +75,7 @@ public class DiscordBot {
 	builder.setStatus(OnlineStatus.ONLINE);
 
 	jda = service.getBuilderWithEventListener();
-	jda.updateCommands().addCommands(slashCommands()).queue();
+	jda.updateCommands().addCommands(commands()).queue();
 
 	shutdown();
     }
@@ -86,22 +85,18 @@ public class DiscordBot {
      * 
      * @return commandlist
      */
-    private List<CommandData> slashCommands() {
+    private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
-	commandlist.add(Commands.slash("messageofmonth", "Get the Message with the most reactions"));
-	commandlist.add(Commands.slash("verify", "send a message to verify member by pressing a button")
-		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
-	commandlist.add(Commands.slash("clear", "clear an amount of messages")
-		.addOption(OptionType.INTEGER, "amount", "amount", true)
-		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.MESSAGE_MANAGE)));
 	commandlist.add(Commands.slash("moveall", "move all from current voice Channel into an other channel")
 		.addOption(OptionType.STRING, "voiceid", "ID from voicechannel", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
+	
+//	commandlist.add(Commands.slash("support", "<Dummy>"));
+//	commandlist.add(Commands.slash("closeticket", "<Dummy>"));
 	// CONTEXT COMMANDS
-	commandlist.add(Commands.context(Command.Type.USER, "Verify")
-		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)));
+
 	return commandlist;
     }
 
