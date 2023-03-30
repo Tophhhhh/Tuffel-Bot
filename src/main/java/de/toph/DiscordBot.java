@@ -83,7 +83,7 @@ public class DiscordBot {
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
-	commandlist.add(Commands.slash("move all", "move all from current voice Channel into an other channel")
+	commandlist.add(Commands.slash("move_all", "move all from current voice Channel into an other channel")
 		.addOption(OptionType.STRING, "voiceid", "ID from voicechannel", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
