@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import de.toph.database.LiteSQL;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
@@ -45,7 +46,7 @@ public class VerifyListener extends ListenerAdapter {
 	if(!message.startsWith("!")) {
 	    return;
 	}
-	if (message.equals("!verify")) {
+	if (message.equals("!verify") && event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
 	    Guild guild = event.getGuild();
 	    String name = guild.getName();
 	    String iconUrl = guild.getIconUrl();

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.toph.DiscordBot;
+import de.toph.listener.CoinflipListener;
 import de.toph.listener.MoveAllListener;
 import de.toph.listener.RoleListener;
 import de.toph.listener.TempVoiceListener;
@@ -42,6 +43,7 @@ public class ServiceImpl implements IService {
 	events.add(new VerifyListener());
 	events.add(new MoveAllListener());
 	events.add(new SupportListener());
+	events.add(new CoinflipListener());
 	
 	return events;
     }

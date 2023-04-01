@@ -83,10 +83,15 @@ public class DiscordBot {
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
+	
+	// Move all command
 	commandlist.add(Commands.slash("moveall", "move all from current voice Channel into an other channel")
 		.addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
+	// Coin flip command
+	commandlist.add(Commands.slash("coinflip", "play coinflip!"));
+	
 	
 //	commandlist.add(Commands.slash("support", "<Dummy>"));
 //	commandlist.add(Commands.slash("closeticket", "<Dummy>"));
