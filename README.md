@@ -8,10 +8,17 @@
 </details>
 
 # Commands
-| Command | Description |
-|---|---|
-| /move all | move all member of your channel to an other vc |
-| /dummy | only a dummy|
+
+## Slash-Commands
+| Command | Description | Rights needed |
+|------|--------------------------|--------|
+| /move all | move all member of your channel to an other vc | - |
+| /dummy | only a dummy| - |
+
+## Prefix-Commands
+| Command | Description | Rights needed |
+|------|--------------------------|--------|
+|!verify | - | - |
 
 
 # Additional
