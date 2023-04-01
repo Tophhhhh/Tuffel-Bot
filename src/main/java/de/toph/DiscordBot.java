@@ -83,6 +83,7 @@ public class DiscordBot {
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
+	// Move all ändern -> in channel | wird ein chat channel ausgewählt, bekommt man einen error, wenn vc dann funktioniert es
 	commandlist.add(Commands.slash("move_all", "move all from current voice Channel into an other channel")
 		.addOption(OptionType.STRING, "voiceid", "ID from voicechannel", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
