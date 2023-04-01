@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.unions.AudioChannelUnion;
+import net.dv8tion.jda.api.entities.channel.unions.GuildChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -24,25 +26,22 @@ public class MoveAllListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-	if (!event.getName().equals("move_all")) {
+	if (!event.getName().equals("moveall")) {
 	    return;
 	}
-	try {
-	    Member member = event.getMember();
-	    AudioChannelUnion acu = member.getVoiceState().getChannel();
-	    List<Member> members = acu.getMembers();
-	    long channelId = event.getOption("voiceid").getAsLong();
+	Member member = event.getMember();
+	AudioChannelUnion acu = member.getVoiceState().getChannel();
+	List<Member> members = acu.getMembers();
+	GuildChannelUnion channel = event.getOption("channel").getAsChannel();
+	if (channel.getType() == ChannelType.VOICE) {
 	    for (Member m : members) {
-		event.getGuild().moveVoiceMember(m, event.getGuild().getVoiceChannelById(channelId)).queue();
+		event.getGuild().moveVoiceMember(m, channel.asVoiceChannel()).queue();
+		event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(), member.getAsMention())).queue();
+		LOGGER.info("User succesfull moved!");
 	    }
-	    event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(),
-		    member.getAsMention())).queue();
-	} catch (NumberFormatException e) {
-	    LOGGER.error(e.getMessage(), e);
-	    event.reply("Bitte gib eine Gültige id ein!").setEphemeral(true).queue();
-	} catch (Exception e) {
-	    LOGGER.error(e.getMessage(), e);
-	    event.reply("Etwas ist schief gelaufen!").setEphemeral(true).queue();
+	} else {
+	    event.reply("Wrong Channeltype! Please select voicechannel!").queue();
 	}
+
     }
 }
