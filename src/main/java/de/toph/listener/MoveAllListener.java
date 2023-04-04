@@ -40,7 +40,7 @@ public class MoveAllListener extends ListenerAdapter {
 		LOGGER.info("User succesfull moved!");
 	    }
 	} else {
-	    event.reply("Wrong Channeltype! Please select voicechannel!").queue();
+	    event.reply("Wrong Channeltype! Please select voicechannel!").setEphemeral(true).queue();
 	}
 
     }

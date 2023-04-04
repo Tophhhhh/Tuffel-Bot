@@ -119,7 +119,7 @@ public class VerifyListener extends ListenerAdapter {
      * @param guildId
      * @return roleId
      */
-    private long getVerifyRoleId(Long guildId) {
+    private Long getVerifyRoleId(Long guildId) {
 	StringBuilder sb = new StringBuilder();
 	sb.append("SELECT DISTINCT * FROM roles ");
 	sb.append("WHERE guildid = " + guildId + " AND rolename = 'Verify'");
@@ -132,7 +132,7 @@ public class VerifyListener extends ListenerAdapter {
 	    if (rs != null) {
 		rs.close();
 	    }
-	    return rid == null ? -1l : rid;
+	    return rid == null ? -1l : Long.valueOf(rid);
 	} catch (SQLException e) {
 	    LOGGER.error(e.getMessage(), e);
 	}
