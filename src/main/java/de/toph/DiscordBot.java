@@ -70,7 +70,7 @@ public class DiscordBot {
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);
-
+	
 	jda = service.getBuilderWithEventListener();
 	jda.updateCommands().addCommands(commands()).queue();
     }

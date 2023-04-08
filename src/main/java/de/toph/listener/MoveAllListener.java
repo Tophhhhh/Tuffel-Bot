@@ -36,9 +36,9 @@ public class MoveAllListener extends ListenerAdapter {
 	if (channel.getType() == ChannelType.VOICE) {
 	    for (Member m : members) {
 		event.getGuild().moveVoiceMember(m, channel.asVoiceChannel()).queue();
-		event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(), member.getAsMention())).queue();
-		LOGGER.info("User succesfull moved!");
 	    }
+	    event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(), member.getAsMention())).queue();
+	    LOGGER.info("User succesfull moved!");
 	} else {
 	    event.reply("Wrong Channeltype! Please select voicechannel!").setEphemeral(true).queue();
 	}
