@@ -31,6 +31,10 @@ public class MoveAllListener extends ListenerAdapter {
 	}
 	Member member = event.getMember();
 	AudioChannelUnion acu = member.getVoiceState().getChannel();
+	if(acu == null) {
+	    event.reply("Du befindest dich nicht in einem VoiceChannel!").queue();
+	    return;
+	}
 	List<Member> members = acu.getMembers();
 	GuildChannelUnion channel = event.getOption("channel").getAsChannel();
 	if (channel.getType() == ChannelType.VOICE) {
@@ -42,6 +46,5 @@ public class MoveAllListener extends ListenerAdapter {
 	} else {
 	    event.reply("Wrong Channeltype! Please select voicechannel!").setEphemeral(true).queue();
 	}
-
     }
 }
