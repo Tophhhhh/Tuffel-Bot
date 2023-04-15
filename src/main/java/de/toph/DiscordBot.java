@@ -73,6 +73,7 @@ public class DiscordBot {
 	
 	jda = service.getBuilderWithEventListener();
 	jda.updateCommands().addCommands(commands()).queue();
+	LOGGER.info("Bot started!!");
     }
 
     /**
@@ -86,6 +87,7 @@ public class DiscordBot {
 	
 	// Move all command
 	commandlist.add(Commands.slash("moveall", "move all from current voice Channel into an other channel")
+		.setGuildOnly(true)
 		.addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
