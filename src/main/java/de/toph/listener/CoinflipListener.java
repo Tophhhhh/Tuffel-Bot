@@ -7,9 +7,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * 
- * @author Toph
+ * @author Tophhhhh
  * 
- * Coinflip Listener
+ * Coinflip command
  * 
  */
 public class CoinflipListener extends ListenerAdapter {

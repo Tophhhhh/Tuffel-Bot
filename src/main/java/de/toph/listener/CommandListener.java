@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * 
- * @author Tophh
+ * @author Tophhhhh
  *
  * Listener for all commands
  */

@@ -14,10 +14,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * 
- * @author Toph
+ * @author Tophhhhh
  * 
- *         Listener to move all from current voice channel to another
- *         Permission.VOICE_MOVE_OTHERS
+ * Listener to move all from current voice channel to another
+ * Permission.VOICE_MOVE_OTHERS
  *
  */
 public class MoveAllListener extends ListenerAdapter {

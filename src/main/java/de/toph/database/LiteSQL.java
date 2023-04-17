@@ -11,6 +11,12 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ * Database connection
+ */
 public class LiteSQL{
 
     private static Logger logger = LoggerFactory.getLogger(LiteSQL.class);

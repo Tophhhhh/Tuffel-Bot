@@ -21,8 +21,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * 
- * @author Toph
- *
+ * @author Tophhhhh
+ * 
+ * service class
  */
 public class ServiceImpl implements IService {
 

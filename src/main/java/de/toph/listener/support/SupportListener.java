@@ -23,7 +23,7 @@ import net.dv8tion.jda.api.interactions.modals.Modal;
  * 
  * noch in development
  * 
- * @author Toph
+ * @author Tophhhhh
  *
  */
 public class SupportListener extends ListenerAdapter{

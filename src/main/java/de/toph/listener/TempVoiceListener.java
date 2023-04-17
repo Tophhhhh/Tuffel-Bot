@@ -12,6 +12,12 @@ import net.dv8tion.jda.api.entities.channel.unions.AudioChannelUnion;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author Tophhhhh
+ * 
+ * Tempchannel for Voicechat
+ */
 public class TempVoiceListener extends ListenerAdapter {
 
     private List<Long> tempchannels;

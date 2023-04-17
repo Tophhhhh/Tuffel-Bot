@@ -24,9 +24,9 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
 /**
  * 
- * @author Toph
+ * @author Tophhhhh
  *
- *         Verify Listener to verify new Users ADMIN!!
+ * Verify Listener to verify new Users ADMIN!!
  */
 public class VerifyListener extends ListenerAdapter {
 

@@ -25,7 +25,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 /**
  * 
- * @author Toph Discord Bot
+ * @author Tophhhhh
+ *
  */
 public class DiscordBot {
 

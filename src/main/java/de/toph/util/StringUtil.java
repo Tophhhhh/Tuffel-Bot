@@ -2,9 +2,9 @@ package de.toph.util;
 
 /**
  * 
- * @author Toph
+ * @author Tophhhhh
  *
- *         String Utils
+ * String Utils
  */
 public class StringUtil {
 
@@ -12,7 +12,7 @@ public class StringUtil {
      * @param string
      * @return isvalid
      * 
-     *         true if the string is valid
+     * true if the string is valid
      */
     public static boolean isVaild(String string) {
 	return string != null && !string.isEmpty();
