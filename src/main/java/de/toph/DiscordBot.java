@@ -9,9 +9,9 @@ import javax.security.auth.login.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.toph.constant.CommandConstant;
 import de.toph.database.LiteSQL;
-import de.toph.service.IService;
-import de.toph.service.ServiceImpl;
+import de.toph.listener.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -38,13 +38,10 @@ public class DiscordBot {
 
     private JDA jda;
 
-    private IService service;
-    
     private Config config;
     
     public DiscordBot() {
 	config = new Config();
-	service = new ServiceImpl();
     }
     
     /**
@@ -71,8 +68,9 @@ public class DiscordBot {
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);
+	builder.addEventListeners(new CommandListener());
 	
-	jda = service.getBuilderWithEventListener();
+	jda = builder.build();
 	jda.updateCommands().addCommands(commands()).queue();
 	LOGGER.info("Bot started!!");
     }
@@ -87,13 +85,15 @@ public class DiscordBot {
 	// SLASH COMMANDS
 	
 	// Move all command
-	commandlist.add(Commands.slash("moveall", "move all from current voice Channel into an other channel")
+	commandlist.add(Commands.slash(CommandConstant.MOVEALLCOMMAND, "move all from current voice Channel into an other channel")
 		.setGuildOnly(true)
 		.addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
 	// Coin flip command
-	commandlist.add(Commands.slash("coinflip", "play coinflip!"));
+	
+	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!")
+		.setGuildOnly(true));
 	
 	
 //	commandlist.add(Commands.slash("support", "<Dummy>"));
