@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.unions.AudioChannelUnion;
@@ -36,10 +37,13 @@ public class MoveallCommand implements ICommand {
 	return command;
     }
 
+    /**
+     * run command 
+     */
     @Override
     public void runCommand(String type, Object event) {
 	switch (type) {
-	case "slash":
+	case CommandConstant.SLASH:
 	    runSlashCommand(event);
 	    break;
 	}

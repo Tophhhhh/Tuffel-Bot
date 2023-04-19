@@ -14,7 +14,7 @@ import de.toph.util.StringUtil;
  * 
  * @author Tophhhhh
  *
- * Config
+ * Bot configuration
  */
 public class Config {
 

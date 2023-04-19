@@ -5,6 +5,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 /**
@@ -52,7 +53,7 @@ public class CoinflipCommand implements ICommand{
     @Override
     public void runCommand(String type, Object event) {
 	switch(type) {
-	case "slash":
+	case CommandConstant.SLASH:
 	    runSlashCommand(event);
 	    break;
 	}
