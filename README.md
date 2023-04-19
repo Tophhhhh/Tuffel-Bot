@@ -1,25 +1,22 @@
 # Tuffel - Discord Bot
 
-<details>
-<summary>
-  <b>Befehle</b>
-</summary>
-- Point 1
-</details>
-
 # Commands
 
 ## Slash-Commands
 | Command | Description | Rights needed |
 |------|--------------------------|--------|
-| /move all | move all member of your channel to an other vc | - |
-| /dummy | only a dummy| - |
+| /moveall | move all member of your channel to an other vc | Move |
+| /coinflip | get value `Head` or `tail` | - |
 
 ## Prefix-Commands
 | Command | Description | Rights needed |
 |------|--------------------------|--------|
-|!verify | - | - |
+|!verify | - | Admin |
 
+## Passiv-functions
+| Function | Description |
+|------| --------|
+| Tempvoice | Create a tempchannel, if User enter a special voicechannel|
 
 # Additional
 

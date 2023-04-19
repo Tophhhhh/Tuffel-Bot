@@ -11,12 +11,20 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ * Database connection
+ */
 public class LiteSQL{
 
     private static Logger logger = LoggerFactory.getLogger(LiteSQL.class);
 
     private static Connection con;
     private static Statement statement;
+    
+    private static boolean isNew = false;
 
     public static void connect(String string) {
 	con = null;
@@ -24,6 +32,7 @@ public class LiteSQL{
 	    File file = new File(string);
 	    if (!file.exists()) {
 		file.createNewFile();
+		isNew = true;
 	    }
 	    String url = "jdbc:sqlite:" + file.getPath();
 	    con = DriverManager.getConnection(url);
@@ -32,8 +41,28 @@ public class LiteSQL{
 
 	    statement = con.createStatement();
 
+	    if(isNew) {
+		createTable();
+	    }
+	    
 	} catch (SQLException | IOException e) {
 	    e.printStackTrace();
+	}
+    }
+    
+    private static void createTable() {
+	// Roles
+	StringBuilder sb = new StringBuilder();
+	sb.append("CREATE TABLE if not exists roles ( ");
+	sb.append("ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
+	sb.append("guildid NUMERIC NOT NULL, ");
+	sb.append("rolename TEXT NOT NULL, ");
+	sb.append("roleid NUMERIC NOT NULL) ");
+	
+	try {
+	    statement.execute(sb.toString());
+	} catch (SQLException e) {
+	    logger.error(e.getMessage(), e);
 	}
     }
 
@@ -41,7 +70,7 @@ public class LiteSQL{
 	try {
 	    if (con != null) {
 		con.close();
-		System.out.println("Verbindung zur Datenbank getrennt.");
+		logger.info("Disconnected from Database");
 	    }
 	} catch (SQLException e) {
 	    logger.error(e.getMessage(), e);

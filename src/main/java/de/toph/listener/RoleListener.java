@@ -4,6 +4,12 @@ import de.toph.database.LiteSQL;
 import net.dv8tion.jda.api.events.role.RoleDeleteEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ * Delete role from Database
+ */
 public class RoleListener extends ListenerAdapter {
 
     @Override

@@ -9,9 +9,9 @@ import javax.security.auth.login.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.toph.constant.CommandConstant;
 import de.toph.database.LiteSQL;
-import de.toph.service.IService;
-import de.toph.service.ServiceImpl;
+import de.toph.listener.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -25,7 +25,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 /**
  * 
- * @author Toph Discord Bot
+ * @author Tophhhhh
+ *
  */
 public class DiscordBot {
 
@@ -37,13 +38,10 @@ public class DiscordBot {
 
     private JDA jda;
 
-    private IService service;
-    
     private Config config;
     
     public DiscordBot() {
 	config = new Config();
-	service = new ServiceImpl();
     }
     
     /**
@@ -70,9 +68,11 @@ public class DiscordBot {
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
 	builder.setActivity(Activity.playing("Looking for friends!"));
 	builder.setStatus(OnlineStatus.ONLINE);
-
-	jda = service.getBuilderWithEventListener();
+	builder.addEventListeners(new CommandListener());
+	
+	jda = builder.build();
 	jda.updateCommands().addCommands(commands()).queue();
+	LOGGER.info("Bot started!!");
     }
 
     /**
@@ -83,11 +83,18 @@ public class DiscordBot {
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
-	// Move all ändern -> in channel | wird ein chat channel ausgewählt, bekommt man einen error, wenn vc dann funktioniert es
-	commandlist.add(Commands.slash("move_all", "move all from current voice Channel into an other channel")
-		.addOption(OptionType.STRING, "voiceid", "ID from voicechannel", true)
+	
+	// Move all command
+	commandlist.add(Commands.slash(CommandConstant.MOVEALLCOMMAND, "move all from current voice Channel into an other channel")
+		.setGuildOnly(true)
+		.addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
+	// Coin flip command
+	
+	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!")
+		.setGuildOnly(true));
+	
 	
 //	commandlist.add(Commands.slash("support", "<Dummy>"));
 //	commandlist.add(Commands.slash("closeticket", "<Dummy>"));

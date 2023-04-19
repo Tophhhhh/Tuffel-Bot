@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import de.toph.database.LiteSQL;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ * Databaseutils
+ */
 public class DatabaseUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseUtils.class);

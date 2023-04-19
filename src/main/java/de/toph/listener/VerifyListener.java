@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import de.toph.database.LiteSQL;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
@@ -23,9 +24,9 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
 /**
  * 
- * @author Toph
+ * @author Tophhhhh
  *
- *         Verify Listener to verify new Users ADMIN!!
+ * Verify Listener to verify new Users ADMIN!!
  */
 public class VerifyListener extends ListenerAdapter {
 
@@ -45,7 +46,7 @@ public class VerifyListener extends ListenerAdapter {
 	if(!message.startsWith("!")) {
 	    return;
 	}
-	if (message.equals("!verify")) {
+	if (message.equals("!verify") && event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
 	    Guild guild = event.getGuild();
 	    String name = guild.getName();
 	    String iconUrl = guild.getIconUrl();
@@ -118,7 +119,7 @@ public class VerifyListener extends ListenerAdapter {
      * @param guildId
      * @return roleId
      */
-    private long getVerifyRoleId(Long guildId) {
+    private Long getVerifyRoleId(Long guildId) {
 	StringBuilder sb = new StringBuilder();
 	sb.append("SELECT DISTINCT * FROM roles ");
 	sb.append("WHERE guildid = " + guildId + " AND rolename = 'Verify'");
@@ -131,7 +132,7 @@ public class VerifyListener extends ListenerAdapter {
 	    if (rs != null) {
 		rs.close();
 	    }
-	    return rid == null ? -1l : rid;
+	    return rid == null ? -1l : Long.valueOf(rid);
 	} catch (SQLException e) {
 	    LOGGER.error(e.getMessage(), e);
 	}

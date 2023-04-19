@@ -10,6 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import de.toph.util.StringUtil;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ * Bot configuration
+ */
 public class Config {
 
     private static Logger logger = LoggerFactory.getLogger(Config.class);
