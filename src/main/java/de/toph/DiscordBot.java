@@ -1,5 +1,8 @@
 package de.toph;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -39,11 +42,11 @@ public class DiscordBot {
     private JDA jda;
 
     private Config config;
-    
+
     public DiscordBot() {
 	config = new Config();
     }
-    
+
     /**
      * the instance of Discord bot
      * 
@@ -56,7 +59,7 @@ public class DiscordBot {
 	}
 	return INSTANCE;
     }
-    
+
     /**
      * execute Discord Bot
      * 
@@ -65,8 +68,10 @@ public class DiscordBot {
     public void execute(String[] args) {
 	LiteSQL.connect(config.getDbPath());
 
+	shutdown();
+	
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
-	builder.setActivity(Activity.playing("Looking for friends!"));
+	builder.setActivity(Activity.playing("Tomatensuppe ohne Tomaten ist auch nur Suppe!"));
 	builder.setStatus(OnlineStatus.ONLINE);
 	builder.addEventListeners(new CommandListener());
 	
@@ -83,25 +88,54 @@ public class DiscordBot {
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
 	// SLASH COMMANDS
-	
+
 	// Move all command
-	commandlist.add(Commands.slash(CommandConstant.MOVEALLCOMMAND, "move all from current voice Channel into an other channel")
-		.setGuildOnly(true)
-		.addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
+	commandlist.add(Commands
+		.slash(CommandConstant.MOVEALLCOMMAND, "move all from current voice Channel into an other channel")
+		.setGuildOnly(true).addOption(OptionType.CHANNEL, "channel", "channel to which should be moved", true)
 		.setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.VOICE_MOVE_OTHERS)));
 
 	// Coin flip command
-	
-	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!")
+
+	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!").setGuildOnly(true));
+
+	// Weather command
+	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather")
 		.setGuildOnly(true));
-	
-	
+
 //	commandlist.add(Commands.slash("support", "<Dummy>"));
 //	commandlist.add(Commands.slash("closeticket", "<Dummy>"));
 	// CONTEXT COMMANDS
 
 	return commandlist;
     }
+    
+    private void shutdown() {
+	    new Thread(() -> {
+	        String line = "";
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	        try {
+	        while ((line = reader.readLine()) != null) {
+
+	            if (line.equalsIgnoreCase("exit")) {
+	            if (jda != null) {
+	                jda.shutdown();
+	                LiteSQL.disconnect();
+	                System.out.println("Bot shutdown");
+	                reader.close();
+	                System.exit(0);
+	            }
+	            } else {
+	            System.out.println("Use 'exit' to shutdown.");
+	            }
+
+	        }
+	        } catch (IOException e) {
+	        LOGGER.error(e.getMessage(), e);
+	        }
+
+	    }).start();
+	    }
 
     /**
      * get Builder

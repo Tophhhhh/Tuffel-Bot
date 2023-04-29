@@ -22,6 +22,7 @@ public class Config {
     
     private String key;
     private String dbPath;
+    private String weatherKey;
     
     public Config() {
 	try(FileReader fr = new FileReader(new File("src/main/resources/config/application.properties"))) {
@@ -29,6 +30,7 @@ public class Config {
 	    prop.load(fr);
 	    key = prop.getProperty("bot.token");
 	    dbPath = prop.getProperty("db.connection");
+	    weatherKey = prop.getProperty("bot.weather");
 	} catch (IOException e) {
 	    logger.error(e.getMessage(), e);
 	}
@@ -44,5 +46,11 @@ public class Config {
     
     public String getDbPath() {
         return dbPath;
+    }
+    
+    // W E A T H E R - K E Y
+    
+    public String getWeatherKey() {
+	return weatherKey;
     }
 }

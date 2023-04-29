@@ -11,7 +11,7 @@
 ## Prefix-Commands
 | Command | Description | Rights needed |
 |------|--------------------------|--------|
-|!verify | - | Admin |
+|!verify | Sends an embedded with description of verification and a button  | Admin |
 
 ## Passiv-functions
 | Function | Description |

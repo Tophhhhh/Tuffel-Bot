@@ -7,7 +7,9 @@ import de.toph.command.CoinflipCommand;
 import de.toph.command.ICommand;
 import de.toph.command.MoveallCommand;
 import de.toph.command.Verifycommand;
+import de.toph.command.WetterCommand;
 import de.toph.constant.CommandConstant;
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -27,6 +29,7 @@ public class CommandListener extends ListenerAdapter {
 	commandList.put(CommandConstant.COINFLIPCOMMAND, CoinflipCommand.getInstance());
 	commandList.put(CommandConstant.MOVEALLCOMMAND, MoveallCommand.getInstance());
 	commandList.put(CommandConstant.VERIFYCOMMAND, Verifycommand.getInstance());
+	commandList.put(CommandConstant.WEATHERCOMMAND, WetterCommand.getInstance());
     }
     
     /**
@@ -66,6 +69,15 @@ public class CommandListener extends ListenerAdapter {
 	ICommand instance = commandList.get(componentId);
 	if(instance != null) {
 	    instance.runCommand(CommandConstant.BUTTONINTERACTION, event);
+	}
+    }
+    
+    @Override
+    public void onModalInteraction(ModalInteractionEvent event) {
+	String modalId = event.getModalId();
+	ICommand instance = commandList.get(modalId);
+	if(instance != null) {
+	    instance.runCommand(CommandConstant.MODALINTERACTION, event);
 	}
     }
 }
