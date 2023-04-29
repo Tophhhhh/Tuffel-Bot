@@ -71,7 +71,7 @@ public class DiscordBot {
 	shutdown();
 	
 	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
-	builder.setActivity(Activity.playing("Tomatensuppe ohne Tomaten ist auch nur Suppe!"));
+	builder.setActivity(Activity.playing("Disco Party Sahne"));
 	builder.setStatus(OnlineStatus.ONLINE);
 	builder.addEventListeners(new CommandListener());
 	
@@ -87,8 +87,6 @@ public class DiscordBot {
      */
     private List<CommandData> commands() {
 	List<CommandData> commandlist = new ArrayList<>();
-	// SLASH COMMANDS
-
 	// Move all command
 	commandlist.add(Commands
 		.slash(CommandConstant.MOVEALLCOMMAND, "move all from current voice Channel into an other channel")
@@ -103,9 +101,6 @@ public class DiscordBot {
 	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather")
 		.setGuildOnly(true));
 
-//	commandlist.add(Commands.slash("support", "<Dummy>"));
-//	commandlist.add(Commands.slash("closeticket", "<Dummy>"));
-	// CONTEXT COMMANDS
 
 	return commandlist;
     }

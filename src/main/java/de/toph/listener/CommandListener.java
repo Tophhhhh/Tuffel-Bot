@@ -3,6 +3,9 @@ package de.toph.listener;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.toph.command.CoinflipCommand;
 import de.toph.command.ICommand;
 import de.toph.command.MoveallCommand;
@@ -23,6 +26,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  */
 public class CommandListener extends ListenerAdapter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandListener.class);
+    
     private Map<String, ICommand> commandList = new HashMap<>();
     
     public CommandListener() {
@@ -40,6 +45,7 @@ public class CommandListener extends ListenerAdapter {
 	String command = event.getName();
 	ICommand instance = commandList.get(command);
 	if(instance != null) {
+	    LOGGER.debug("Run slashcommand");
 	    instance.runCommand(CommandConstant.SLASH, event);
 	}
     }
@@ -56,6 +62,7 @@ public class CommandListener extends ListenerAdapter {
 	message = message.substring(1);
 	ICommand instance = commandList.get(message.split(" ")[0]);
 	if(instance != null) {
+	    LOGGER.debug("Run message command");
 	    instance.runCommand(CommandConstant.MESSAGERECIEVED, event);
 	}
     }
@@ -68,6 +75,7 @@ public class CommandListener extends ListenerAdapter {
 	String componentId = event.getComponentId().split("-")[0];
 	ICommand instance = commandList.get(componentId);
 	if(instance != null) {
+	    LOGGER.debug("Run button interaction");
 	    instance.runCommand(CommandConstant.BUTTONINTERACTION, event);
 	}
     }
@@ -77,6 +85,7 @@ public class CommandListener extends ListenerAdapter {
 	String modalId = event.getModalId();
 	ICommand instance = commandList.get(modalId);
 	if(instance != null) {
+	    LOGGER.debug("Run modal interaction");
 	    instance.runCommand(CommandConstant.MODALINTERACTION, event);
 	}
     }

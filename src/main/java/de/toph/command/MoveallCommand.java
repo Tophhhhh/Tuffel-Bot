@@ -24,6 +24,10 @@ public class MoveallCommand implements ICommand {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MoveallCommand.class);
 
+    private MoveallCommand() {
+	// EMPTY
+    }
+    
     /**
      * 
      * get instance of moveall

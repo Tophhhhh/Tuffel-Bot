@@ -34,6 +34,10 @@ public class Verifycommand implements ICommand {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Verifycommand.class);
 
+    private Verifycommand() {
+	// E M P T Y
+    }
+    
     /**
      * 
      * get instance of verifycommand

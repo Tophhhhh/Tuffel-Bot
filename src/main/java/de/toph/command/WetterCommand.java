@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.io.IOException;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.toph.Config;
 import de.toph.constant.CommandConstant;
@@ -19,9 +21,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * 
+ * @author Tophhhhh
+ *
+ */
 public class WetterCommand implements ICommand {
 
     private static WetterCommand command;
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(WetterCommand.class);
     
     private Config conf;
     
@@ -77,18 +86,19 @@ public class WetterCommand implements ICommand {
 	slashEvent.replyModal(modal).queue();}
 
     private Integer parseWeather(String JsonString) {
-	String test = JsonString;
+	String json = JsonString;
 
-	JSONObject object = new JSONObject(test);
-	JSONObject test2 = object.getJSONObject("current");
+	JSONObject jsonObject = new JSONObject(json);
+	JSONObject current = jsonObject.getJSONObject("current");
 	
-	Integer test3 = (Integer) test2.get("temperature");;
+	Integer currentTemp = (Integer) current.get("temperature");
 	
-	return test3;
+	LOGGER.debug(String.valueOf(currentTemp));
+	
+	return currentTemp;
     }
     
     private String doRequest(String option) throws IOException {
-
 	OkHttpClient client = new OkHttpClient();
 	
 	HttpUrl.Builder urlBuilder = HttpUrl.parse("http://api.weatherstack.com/current").newBuilder();
