@@ -100,6 +100,12 @@ public class DiscordBot {
 	// Weather command
 	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather")
 		.setGuildOnly(true));
+	
+	// Poll command
+	commandlist.add(Commands.slash(CommandConstant.POLLCOMMAND, "create poll")
+		.addOption(OptionType.STRING, "question", "set a question")
+		.addOption(OptionType.STRING, "answere", "set up answere (separated by ,)")
+		.setGuildOnly(true));
 
 
 	return commandlist;

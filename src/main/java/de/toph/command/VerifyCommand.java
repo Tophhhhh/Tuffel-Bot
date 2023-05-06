@@ -28,13 +28,13 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
  * @author Tophhhhh
  *
  */
-public class Verifycommand implements ICommand {
+public class VerifyCommand implements ICommand {
 
-    private static Verifycommand command;
+    private static VerifyCommand command;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Verifycommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(VerifyCommand.class);
 
-    private Verifycommand() {
+    private VerifyCommand() {
 	// E M P T Y
     }
     
@@ -44,9 +44,9 @@ public class Verifycommand implements ICommand {
      * 
      * @return Verifycommand
      */
-    public static Verifycommand getInstance() {
+    public static VerifyCommand getInstance() {
 	if (command == null) {
-	    command = new Verifycommand();
+	    command = new VerifyCommand();
 	}
 	return command;
     }

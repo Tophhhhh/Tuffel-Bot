@@ -3,6 +3,7 @@ package de.toph.command;
 import java.awt.Color;
 import java.io.IOException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,21 +27,21 @@ import okhttp3.Response;
  * @author Tophhhhh
  *
  */
-public class WetterCommand implements ICommand {
+public class WeatherCommand implements ICommand {
 
-    private static WetterCommand command;
+    private static WeatherCommand command;
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(WetterCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeatherCommand.class);
     
     private Config conf;
     
-    private WetterCommand() {
+    private WeatherCommand() {
 	conf = new Config();
     }
     
-    public static WetterCommand getInstance() {
+    public static WeatherCommand getInstance() {
    	if(command == null) {
-   	    command = new WetterCommand();
+   	    command = new WeatherCommand();
    	}
    	return command;
        }
@@ -65,10 +66,13 @@ public class WetterCommand implements ICommand {
 	    String json = doRequest(city);
 	    Integer celsius = parseWeather(json);
 	    
+	    String message = String.format("Es ist %s°C in der Ortschaft", celsius);
+	    String error = "Die eingegebene Stadt ist ungültig!";
+	    
 	    EmbedBuilder eb = new EmbedBuilder();
 	    eb.setTitle("Wetter");
 	    eb.setColor(Color.red);
-	    eb.addField("Temperatur", String.format("Es ist %s°C in der Ortschaft", celsius), false);
+	    eb.addField("Temperatur", celsius == null ? error : message, false);
 	    
 	    mEvent.replyEmbeds(eb.build()).queue();
 	} catch (IOException e) {
@@ -89,12 +93,14 @@ public class WetterCommand implements ICommand {
 	String json = JsonString;
 
 	JSONObject jsonObject = new JSONObject(json);
-	JSONObject current = jsonObject.getJSONObject("current");
-	
-	Integer currentTemp = (Integer) current.get("temperature");
-	
-	LOGGER.debug(String.valueOf(currentTemp));
-	
+	Integer currentTemp = null;
+	try {
+	    JSONObject current = jsonObject.getJSONObject("current");
+	    currentTemp = (Integer) current.get("temperature");
+	    LOGGER.debug(String.valueOf(currentTemp));
+	} catch (JSONException e) {
+	    LOGGER.error(e.getMessage(), e );
+	}
 	return currentTemp;
     }
     
@@ -109,6 +115,10 @@ public class WetterCommand implements ICommand {
 	
 	Request request = new Request.Builder().url(url).build();
 	Response response = client.newCall(request).execute();
+	
+	if(response.code() != 200) {
+	    
+	}
 	
 	String reponseString = response.body().string();
 	response.close();

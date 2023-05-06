@@ -9,8 +9,9 @@ import org.slf4j.LoggerFactory;
 import de.toph.command.CoinflipCommand;
 import de.toph.command.ICommand;
 import de.toph.command.MoveallCommand;
-import de.toph.command.Verifycommand;
-import de.toph.command.WetterCommand;
+import de.toph.command.PollCommand;
+import de.toph.command.VerifyCommand;
+import de.toph.command.WeatherCommand;
 import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -33,8 +34,9 @@ public class CommandListener extends ListenerAdapter {
     public CommandListener() {
 	commandList.put(CommandConstant.COINFLIPCOMMAND, CoinflipCommand.getInstance());
 	commandList.put(CommandConstant.MOVEALLCOMMAND, MoveallCommand.getInstance());
-	commandList.put(CommandConstant.VERIFYCOMMAND, Verifycommand.getInstance());
-	commandList.put(CommandConstant.WEATHERCOMMAND, WetterCommand.getInstance());
+	commandList.put(CommandConstant.VERIFYCOMMAND, VerifyCommand.getInstance());
+	commandList.put(CommandConstant.WEATHERCOMMAND, WeatherCommand.getInstance());
+	commandList.put(CommandConstant.POLLCOMMAND, PollCommand.getInstance());
     }
     
     /**

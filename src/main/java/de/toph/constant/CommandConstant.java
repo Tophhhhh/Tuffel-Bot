@@ -13,6 +13,7 @@ public class CommandConstant {
     public static final String MOVEALLCOMMAND = "moveall";
     public static final String VERIFYCOMMAND = "verify";
     public static final String WEATHERCOMMAND = "weather";
+    public static final String POLLCOMMAND = "poll";
     
     // C O M M A N D - T Y P E S
     public static final String SLASH = "slash";
