@@ -1,9 +1,6 @@
 package de.toph.command;
 
 import java.awt.Color;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,25 +58,18 @@ public class PollCommand implements ICommand {
 	    return;
 	}
 	
-	OptionMapping omAnswere = slashEvent.getOption("answere");
-	if(omAnswere == null) {
-	    slashEvent.reply("Bitte antwortmöglichkeiten angeben!").setEphemeral(false).queue();
-	    return;
-	}
-	
 	String question = omQuestion.getAsString();
-	String option = omAnswere.getAsString();
-	
-	List<String> result = Arrays.asList(option.split(",")).stream().map(e -> String.format("'%s'", e.trim())).collect(Collectors.toList());
 	
 	EmbedBuilder eb = new EmbedBuilder();
 	eb.setAuthor(slashEvent.getUser().getName());
 	eb.setTitle("Umfrage");
 	eb.setColor(Color.CYAN);
 	eb.setDescription(question);
-	for(String s : result) {
-	    eb.addField("Antwort", s, true);
-	}
+	
+	eb.addField("Aktzeptiert", "-", true);
+	eb.addField("Abgelehnt", "-", true);
+	eb.addField("Fragezeichen", "-", true);
+	
 	eb.setFooter(slashEvent.getUser().getAsTag());
 	
 	slashEvent.replyEmbeds(eb.build()).queue();

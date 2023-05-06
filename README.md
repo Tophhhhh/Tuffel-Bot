@@ -8,6 +8,7 @@
 | /moveall | move all member of your channel to an other vc | Move |
 | /coinflip | get value `Head` or `tail` | - |
 | /weather | get weather of a city | - |
+| /poll [Question]| create poll | - |
 
 ## Prefix-Commands
 | Command | Description | Rights needed |

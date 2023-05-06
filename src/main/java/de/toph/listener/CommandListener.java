@@ -47,7 +47,7 @@ public class CommandListener extends ListenerAdapter {
 	String command = event.getName();
 	ICommand instance = commandList.get(command);
 	if(instance != null) {
-	    LOGGER.debug("Run slashcommand");
+	    LOGGER.debug("Run slashcommand", instance.getClass());
 	    instance.runCommand(CommandConstant.SLASH, event);
 	}
     }
