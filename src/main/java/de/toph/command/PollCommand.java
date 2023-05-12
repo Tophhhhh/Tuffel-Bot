@@ -5,7 +5,6 @@ import java.awt.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -15,7 +14,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
  * @author Tophhhhh
  *
  */
-public class PollCommand implements ICommand {
+public class PollCommand extends AbstractCommand {
 
     private static PollCommand command;
 
@@ -33,23 +32,13 @@ public class PollCommand implements ICommand {
     }
     
     @Override
-    public void runCommand(String type, Object event) {
-	switch (type) {
-	case CommandConstant.SLASH:
-	    runSlashCommand(event);
-	    break;
-	case CommandConstant.BUTTONINTERACTION:
-	    runButtonCommand(event);
-	    break;
-	}
-    }
-
-    private void runButtonCommand(Object event) {
+    protected void runButtonCommand(Object event) {
 	// TODO Auto-generated method stub
 	
     }
 
-    private void runSlashCommand(Object event) {
+    @Override
+    protected void runSlashCommand(Object event) {
 	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
 	
 	OptionMapping omQuestion = slashEvent.getOption("question");

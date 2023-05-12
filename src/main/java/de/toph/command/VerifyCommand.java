@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.toph.constant.CommandConstant;
 import de.toph.database.LiteSQL;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
@@ -28,7 +27,7 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
  * @author Tophhhhh
  *
  */
-public class VerifyCommand implements ICommand {
+public class VerifyCommand extends AbstractCommand {
 
     private static VerifyCommand command;
 
@@ -52,26 +51,12 @@ public class VerifyCommand implements ICommand {
     }
     
     /**
-     * run command 
-     */
-    @Override
-    public void runCommand(String type, Object event) {
-	switch (type) {
-	case CommandConstant.MESSAGERECIEVED:
-	    runMessageCommand(event);
-	    break;
-	case CommandConstant.BUTTONINTERACTION:
-	    runButtonCommand(event);
-	    break;
-	}
-    }
-
-    /**
      * Run command button interaction
      * 
      * @param event
      */
-    private void runButtonCommand(Object event) {
+    @Override
+    protected void runButtonCommand(Object event) {
 	ButtonInteractionEvent buttonEvent = (ButtonInteractionEvent) event;
 	if (!buttonEvent.getComponentId().equals("verify-accept") && !(buttonEvent.getChannelType() == ChannelType.TEXT)) {
 	    return;
@@ -105,7 +90,8 @@ public class VerifyCommand implements ICommand {
      * 
      * @param event
      */
-    private void runMessageCommand(Object event) {
+    @Override
+    protected void runMessageCommand(Object event) {
 	MessageReceivedEvent messageEvent = (MessageReceivedEvent) event;
 	if(!messageEvent.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
 	    messageEvent.getChannel().sendMessage("Du hast keine Rechte dazu!").queue();

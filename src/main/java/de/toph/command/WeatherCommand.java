@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.toph.Config;
-import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -27,7 +26,7 @@ import okhttp3.Response;
  * @author Tophhhhh
  *
  */
-public class WeatherCommand implements ICommand {
+public class WeatherCommand extends AbstractCommand {
 
     private static WeatherCommand command;
     
@@ -47,18 +46,7 @@ public class WeatherCommand implements ICommand {
        }
     
     @Override
-    public void runCommand(String type, Object event) {
-	switch(type) {
-	case CommandConstant.SLASH:
-	    runSlashCommand(event);
-	    break;
-	case CommandConstant.MODALINTERACTION:
-	    runModalInteraction(event);
-	    break;
-	}
-    }
-    
-    private void runModalInteraction(Object event) {
+    protected void runModalInteraction(Object event) {
 	ModalInteractionEvent mEvent = (ModalInteractionEvent) event;
 	String city = mEvent.getValue("weatercity").getAsString();
 	
@@ -80,7 +68,8 @@ public class WeatherCommand implements ICommand {
 	}
     }
 
-    private void runSlashCommand(Object event) {
+    @Override
+    protected void runSlashCommand(Object event) {
 	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
 
 	TextInput city = TextInput.create("weatercity", "Stadt", TextInputStyle.SHORT).setPlaceholder("City")

@@ -6,7 +6,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
@@ -16,7 +15,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
  *
  * Coinflip command
  */
-public class CoinflipCommand implements ICommand{
+public class CoinflipCommand extends AbstractCommand {
 
     private static CoinflipCommand command;
     
@@ -44,7 +43,8 @@ public class CoinflipCommand implements ICommand{
      * 
      * @param event
      */
-    private void runSlashCommand(Object event) {
+    @Override
+    protected void runSlashCommand(Object event) {
 	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
 	Random r = new Random();
 	int value = r.nextInt(2);
@@ -58,17 +58,5 @@ public class CoinflipCommand implements ICommand{
 	eb.setFooter(String.format("%s hat eine Sucht", slashEvent.getUser().getAsTag()));
 	
 	slashEvent.replyEmbeds(eb.build()).queue();
-    }
-
-    /**
-     * run command 
-     */
-    @Override
-    public void runCommand(String type, Object event) {
-	switch(type) {
-	case CommandConstant.SLASH:
-	    runSlashCommand(event);
-	    break;
-	}
     }
 }

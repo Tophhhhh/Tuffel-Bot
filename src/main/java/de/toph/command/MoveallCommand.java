@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.toph.constant.CommandConstant;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.entities.channel.unions.AudioChannelUnion;
@@ -18,7 +17,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
  *
  * Moveall command
  */
-public class MoveallCommand implements ICommand {
+public class MoveallCommand extends AbstractCommand {
 
     private static MoveallCommand command;
 
@@ -42,22 +41,11 @@ public class MoveallCommand implements ICommand {
     }
 
     /**
-     * run command 
-     */
-    @Override
-    public void runCommand(String type, Object event) {
-	switch (type) {
-	case CommandConstant.SLASH:
-	    runSlashCommand(event);
-	    break;
-	}
-    }
-
-    /**
      * 
      * @param event
      */
-    private void runSlashCommand(Object event) {
+    @Override
+    protected void runSlashCommand(Object event) {
 	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
 	Member member = slashEvent.getMember();
 	AudioChannelUnion acu = member.getVoiceState().getChannel();
