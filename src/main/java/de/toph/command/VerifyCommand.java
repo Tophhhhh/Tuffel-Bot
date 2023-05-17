@@ -29,27 +29,8 @@ import net.dv8tion.jda.api.requests.restaction.RoleAction;
  */
 public class VerifyCommand extends AbstractCommand {
 
-    private static VerifyCommand command;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(VerifyCommand.class);
 
-    private VerifyCommand() {
-	// E M P T Y
-    }
-    
-    /**
-     * 
-     * get instance of verifycommand
-     * 
-     * @return Verifycommand
-     */
-    public static VerifyCommand getInstance() {
-	if (command == null) {
-	    command = new VerifyCommand();
-	}
-	return command;
-    }
-    
     /**
      * Run command button interaction
      * 

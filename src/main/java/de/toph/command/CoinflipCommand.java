@@ -17,26 +17,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
  */
 public class CoinflipCommand extends AbstractCommand {
 
-    private static CoinflipCommand command;
-    
     private static final Logger LOGGER = LoggerFactory.getLogger(CoinflipCommand.class);
-    
-    private CoinflipCommand() {
-	// empty
-    }
-    
-    /**
-     * 
-     * get instance of coinflipcommand
-     * 
-     * @return CoinflipCommand
-     */
-    public static CoinflipCommand getInstance() {
-	if(command == null) {
-	    command = new CoinflipCommand();
-	}
-	return command;
-    }
     
     /**
      * run slash command

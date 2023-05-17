@@ -20,37 +20,41 @@ public class Config {
 
     private static Logger logger = LoggerFactory.getLogger(Config.class);
     
-    private String key;
-    private String dbPath;
-    private String weatherKey;
+    private static Config INSTANCE;
     
-    public Config() {
+    private Properties prop;
+    
+    private Config() {
 	try(FileReader fr = new FileReader(new File("src/main/resources/config/application.properties"))) {
-	    Properties prop = new Properties();
+	    prop = new Properties();
 	    prop.load(fr);
-	    key = prop.getProperty("bot.token");
-	    dbPath = prop.getProperty("db.connection");
-	    weatherKey = prop.getProperty("bot.weather");
 	} catch (IOException e) {
 	    logger.error(e.getMessage(), e);
 	}
+    }
+    
+    public static Config getInstance() {
+	if(INSTANCE == null) {
+	    INSTANCE = new Config();
+	}
+	return INSTANCE;
     }
 
     // K E Y
     
     public String getKey() {
-        return StringUtil.emtpyStringIfNull(key);
+        return StringUtil.emtpyStringIfNull(prop.getProperty("bot.token"));
     }
 
     // D B - P A T H
     
     public String getDbPath() {
-        return dbPath;
+        return prop.getProperty("db.connection");
     }
     
     // W E A T H E R - K E Y
     
     public String getWeatherKey() {
-	return weatherKey;
+	return prop.getProperty("bot.weather");
     }
 }

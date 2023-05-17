@@ -41,12 +41,6 @@ public class DiscordBot {
 
     private JDA jda;
 
-    private Config config;
-
-    public DiscordBot() {
-	config = new Config();
-    }
-
     /**
      * the instance of Discord bot
      * 
@@ -66,11 +60,13 @@ public class DiscordBot {
      * @param args
      */
     public void execute(String[] args) {
-	LiteSQL.connect(config.getDbPath());
+	Config conf = Config.getInstance();
+	
+	LiteSQL.connect(conf.getDbPath());
 
 	shutdown();
 	
-	builder = JDABuilder.createDefault(config.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
+	builder = JDABuilder.createDefault(conf.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
 	builder.setActivity(Activity.playing("Disco Party Sahne"));
 	builder.setStatus(OnlineStatus.ONLINE);
 	builder.addEventListeners(new CommandListener());

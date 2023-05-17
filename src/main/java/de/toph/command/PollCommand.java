@@ -16,21 +16,8 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
  */
 public class PollCommand extends AbstractCommand {
 
-    private static PollCommand command;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(PollCommand.class);
 
-    private PollCommand() {
-	// E M P T Y
-    }
-    
-    public static PollCommand getInstance() {
-	if (command == null) {
-	    command = new PollCommand();
-	}
-	return command;
-    }
-    
     @Override
     protected void runButtonCommand(Object event) {
 	// TODO Auto-generated method stub

@@ -19,26 +19,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
  */
 public class MoveallCommand extends AbstractCommand {
 
-    private static MoveallCommand command;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(MoveallCommand.class);
-
-    private MoveallCommand() {
-	// EMPTY
-    }
-    
-    /**
-     * 
-     * get instance of moveall
-     * 
-     * @return MoveallCommand
-     */
-    public static MoveallCommand getInstance() {
-	if (command == null) {
-	    command = new MoveallCommand();
-	}
-	return command;
-    }
 
     /**
      * 

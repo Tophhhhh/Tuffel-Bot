@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.toph.Config;
+import de.toph.exception.WeatherException;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -28,22 +29,7 @@ import okhttp3.Response;
  */
 public class WeatherCommand extends AbstractCommand {
 
-    private static WeatherCommand command;
-    
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherCommand.class);
-    
-    private Config conf;
-    
-    private WeatherCommand() {
-	conf = new Config();
-    }
-    
-    public static WeatherCommand getInstance() {
-   	if(command == null) {
-   	    command = new WeatherCommand();
-   	}
-   	return command;
-       }
     
     @Override
     protected void runModalInteraction(Object event) {
@@ -63,8 +49,8 @@ public class WeatherCommand extends AbstractCommand {
 	    eb.addField("Temperatur", celsius == null ? error : message, false);
 	    
 	    mEvent.replyEmbeds(eb.build()).queue();
-	} catch (IOException e) {
-	    e.printStackTrace();
+	} catch (IOException | WeatherException e) {
+	    LOGGER.error(e.getMessage(), e);
 	}
     }
 
@@ -93,8 +79,10 @@ public class WeatherCommand extends AbstractCommand {
 	return currentTemp;
     }
     
-    private String doRequest(String option) throws IOException {
+    private String doRequest(String option) throws IOException, WeatherException {
 	OkHttpClient client = new OkHttpClient();
+
+	Config conf = Config.getInstance();
 	
 	HttpUrl.Builder urlBuilder = HttpUrl.parse("http://api.weatherstack.com/current").newBuilder();
 	urlBuilder.addQueryParameter("access_key", conf.getWeatherKey());
@@ -106,7 +94,7 @@ public class WeatherCommand extends AbstractCommand {
 	Response response = client.newCall(request).execute();
 	
 	if(response.code() != 200) {
-	    
+	    throw new WeatherException("could not get response");
 	}
 	
 	String reponseString = response.body().string();

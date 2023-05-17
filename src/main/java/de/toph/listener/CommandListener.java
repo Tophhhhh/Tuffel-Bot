@@ -32,11 +32,11 @@ public class CommandListener extends ListenerAdapter {
     private Map<String, ICommand> commandList = new HashMap<>();
     
     public CommandListener() {
-	commandList.put(CommandConstant.COINFLIPCOMMAND, CoinflipCommand.getInstance());
-	commandList.put(CommandConstant.MOVEALLCOMMAND, MoveallCommand.getInstance());
-	commandList.put(CommandConstant.VERIFYCOMMAND, VerifyCommand.getInstance());
-	commandList.put(CommandConstant.WEATHERCOMMAND, WeatherCommand.getInstance());
-	commandList.put(CommandConstant.POLLCOMMAND, PollCommand.getInstance());
+	commandList.put(CommandConstant.COINFLIPCOMMAND, new CoinflipCommand());
+	commandList.put(CommandConstant.MOVEALLCOMMAND, new MoveallCommand());
+	commandList.put(CommandConstant.VERIFYCOMMAND, new VerifyCommand());
+	commandList.put(CommandConstant.WEATHERCOMMAND, new WeatherCommand());
+	commandList.put(CommandConstant.POLLCOMMAND, new PollCommand());
     }
     
     /**
