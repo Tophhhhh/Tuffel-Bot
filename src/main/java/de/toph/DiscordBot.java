@@ -91,7 +91,8 @@ public class DiscordBot {
 
 	// Coin flip command
 
-	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!").setGuildOnly(true));
+	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!")
+		.setGuildOnly(true));
 
 	// Weather command
 	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather")
@@ -107,31 +108,28 @@ public class DiscordBot {
     }
     
     private void shutdown() {
-	    new Thread(() -> {
-	        String line = "";
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	        try {
-	        while ((line = reader.readLine()) != null) {
-
-	            if (line.equalsIgnoreCase("exit")) {
-	            if (jda != null) {
-	                jda.shutdown();
-	                LiteSQL.disconnect();
-	                System.out.println("Bot shutdown");
-	                reader.close();
-	                System.exit(0);
-	            }
-	            } else {
-	            System.out.println("Use 'exit' to shutdown.");
-	            }
-
-	        }
-	        } catch (IOException e) {
-	        LOGGER.error(e.getMessage(), e);
-	        }
-
-	    }).start();
+	new Thread(() -> {
+	    String line = "";
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	    try {
+		while ((line = reader.readLine()) != null) {
+		    if (line.equalsIgnoreCase("exit")) {
+			if (jda != null) {
+			    jda.shutdown();
+			    LiteSQL.disconnect();
+			    LOGGER.info("Bot shutdown");
+			    reader.close();
+			    System.exit(0);
+			}
+		    } else {
+			LOGGER.info("Use 'exit' to shutdown.");
+		    }
+		}
+	    } catch (IOException e) {
+		LOGGER.error(e.getMessage(), e);
 	    }
+	}).start();
+    }
 
     /**
      * get Builder

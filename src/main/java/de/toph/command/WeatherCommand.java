@@ -40,7 +40,7 @@ public class WeatherCommand extends AbstractCommand {
 	    String json = doRequest(city);
 	    Integer celsius = parseWeather(json);
 	    
-	    String message = String.format("Es ist %s°C in der Ortschaft", celsius);
+	    String message = String.format("Es ist %s°C in %s", celsius, city);
 	    String error = "Die eingegebene Stadt ist ungültig!";
 	    
 	    EmbedBuilder eb = new EmbedBuilder();
@@ -94,6 +94,7 @@ public class WeatherCommand extends AbstractCommand {
 	Response response = client.newCall(request).execute();
 	
 	if(response.code() != 200) {
+	    LOGGER.error("HTTP Status is {}. Something went wrong", response.code());
 	    throw new WeatherException("could not get response");
 	}
 	
