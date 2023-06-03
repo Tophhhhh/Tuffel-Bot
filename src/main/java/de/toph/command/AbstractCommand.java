@@ -4,6 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.toph.constant.CommandConstant;
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 /**
  * 
@@ -22,16 +26,16 @@ public class AbstractCommand implements ICommand {
     public void runCommand(String type, Object event) {
 	switch (type) {
 	case CommandConstant.SLASH:
-	    runSlashCommand(event);
+	    runSlashCommand((SlashCommandInteractionEvent) event);
 	    break;
 	case CommandConstant.MESSAGERECIEVED:
-	    runMessageCommand(event);
+	    runMessageCommand((MessageReceivedEvent) event);
 	    break;
 	case CommandConstant.BUTTONINTERACTION:
-	    runButtonCommand(event);
+	    runButtonCommand((ButtonInteractionEvent) event);
 	    break;
 	case CommandConstant.MODALINTERACTION:
-	    runModalInteraction(event);
+	    runModalInteraction((ModalInteractionEvent) event);
 	    break;
 	}
     }
@@ -41,7 +45,7 @@ public class AbstractCommand implements ICommand {
      * 
      * @param event
      */
-    protected void runModalInteraction(Object event) {
+    protected void runModalInteraction(ModalInteractionEvent event) {
 	logger.info("Set up modalinteraction");
     }
 
@@ -50,7 +54,7 @@ public class AbstractCommand implements ICommand {
      * 
      * @param event
      */
-    protected void runSlashCommand(Object event) {
+    protected void runSlashCommand(SlashCommandInteractionEvent event) {
 	logger.info("Set up slashcommand");
     }
 
@@ -59,7 +63,7 @@ public class AbstractCommand implements ICommand {
      * 
      * @param event
      */
-    protected void runButtonCommand(Object event) {
+    protected void runButtonCommand(ButtonInteractionEvent event) {
 	logger.info("Set up buttoncommand");
     }
 
@@ -68,7 +72,7 @@ public class AbstractCommand implements ICommand {
      * 
      * @param event
      */
-    protected void runMessageCommand(Object event) {
+    protected void runMessageCommand(MessageReceivedEvent event) {
 	logger.info("Set up messagecommand");
     }
 }

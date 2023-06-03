@@ -26,24 +26,23 @@ public class MoveallCommand extends AbstractCommand {
      * @param event
      */
     @Override
-    protected void runSlashCommand(Object event) {
-	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
-	Member member = slashEvent.getMember();
+    protected void runSlashCommand(SlashCommandInteractionEvent event) {
+	Member member = event.getMember();
 	AudioChannelUnion acu = member.getVoiceState().getChannel();
 	if (acu == null) {
-	    slashEvent.reply("Du befindest dich nicht in einem VoiceChannel!").queue();
+	    event.reply("Du befindest dich nicht in einem VoiceChannel!").queue();
 	    return;
 	}
 	List<Member> members = acu.getMembers();
-	GuildChannelUnion channel = slashEvent.getOption("channel").getAsChannel();
+	GuildChannelUnion channel = event.getOption("channel").getAsChannel();
 	if (channel.getType() == ChannelType.VOICE) {
 	    for (Member m : members) {
-		slashEvent.getGuild().moveVoiceMember(m, channel.asVoiceChannel()).queue();
+		event.getGuild().moveVoiceMember(m, channel.asVoiceChannel()).queue();
 	    }
-	    slashEvent.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(), member.getAsMention())).queue();
+	    event.reply(String.format("Member aus dem channel `%s` wurden von %s verschoben", acu.getName(), member.getAsMention())).queue();
 	    LOGGER.info("User succesfull moved!");
 	} else {
-	    slashEvent.reply("Wrong Channeltype! Please select voicechannel!").setEphemeral(true).queue();
+	    event.reply("Wrong Channeltype! Please select voicechannel!").setEphemeral(true).queue();
 	}
     }
 

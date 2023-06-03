@@ -37,13 +37,12 @@ public class VerifyCommand extends AbstractCommand {
      * @param event
      */
     @Override
-    protected void runButtonCommand(Object event) {
-	ButtonInteractionEvent buttonEvent = (ButtonInteractionEvent) event;
-	if (!buttonEvent.getComponentId().equals("verify-accept") && !(buttonEvent.getChannelType() == ChannelType.TEXT)) {
+    protected void runButtonCommand(ButtonInteractionEvent event) {
+	if (!event.getComponentId().equals("verify-accept") && !(event.getChannelType() == ChannelType.TEXT)) {
 	    return;
 	}
-	User user = buttonEvent.getUser();
-	Guild guild = buttonEvent.getGuild();
+	User user = event.getUser();
+	Guild guild = event.getGuild();
 	Long roleid = getVerifyRoleId(guild.getIdLong());
 
 	Role role = guild.getRoleById(roleid);
@@ -63,7 +62,7 @@ public class VerifyCommand extends AbstractCommand {
 	    guild.addRoleToMember(user, role).queue();
 	    user.openPrivateChannel().flatMap(channel -> channel.sendMessage("Du wurdest Verifiziert!")).queue();
 	}
-	buttonEvent.deferEdit().complete();
+	event.deferEdit().complete();
     }
 
     /**
@@ -72,19 +71,18 @@ public class VerifyCommand extends AbstractCommand {
      * @param event
      */
     @Override
-    protected void runMessageCommand(Object event) {
-	MessageReceivedEvent messageEvent = (MessageReceivedEvent) event;
-	if(!messageEvent.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
-	    messageEvent.getChannel().sendMessage("Du hast keine Rechte dazu!").queue();
+    protected void runMessageCommand(MessageReceivedEvent event) {
+	if(!event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
+	    event.getChannel().sendMessage("Du hast keine Rechte dazu!").queue();
 	}
 	
-	Guild guild = messageEvent.getGuild();
+	Guild guild = event.getGuild();
 	String name = guild.getName();
 	String iconUrl = guild.getIconUrl();
 	
-	messageEvent.getChannel().sendMessageEmbeds(createVerifyEmbeded(name, iconUrl))
+	event.getChannel().sendMessageEmbeds(createVerifyEmbeded(name, iconUrl))
 	    .addActionRow(Button.primary("verify-accept", Emoji.fromUnicode("U+2705"))).queue();
-	messageEvent.getChannel().deleteMessageById(messageEvent.getMessageId()).queue();
+	event.getChannel().deleteMessageById(event.getMessageId()).queue();
     }
     
     /**

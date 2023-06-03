@@ -32,9 +32,8 @@ public class WeatherCommand extends AbstractCommand {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherCommand.class);
     
     @Override
-    protected void runModalInteraction(Object event) {
-	ModalInteractionEvent mEvent = (ModalInteractionEvent) event;
-	String city = mEvent.getValue("weatercity").getAsString();
+    protected void runModalInteraction(ModalInteractionEvent event) {
+	String city = event.getValue("weatercity").getAsString();
 	
 	try {
 	    String json = doRequest(city);
@@ -48,21 +47,19 @@ public class WeatherCommand extends AbstractCommand {
 	    eb.setColor(Color.red);
 	    eb.addField("Temperatur", celsius == null ? error : message, false);
 	    
-	    mEvent.replyEmbeds(eb.build()).queue();
+	    event.replyEmbeds(eb.build()).queue();
 	} catch (IOException | WeatherException e) {
 	    LOGGER.error(e.getMessage(), e);
 	}
     }
 
     @Override
-    protected void runSlashCommand(Object event) {
-	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
-
+    protected void runSlashCommand(SlashCommandInteractionEvent event) {
 	TextInput city = TextInput.create("weatercity", "Stadt", TextInputStyle.SHORT).setPlaceholder("City")
 		.setMinLength(2).setMaxLength(40).build();
 
 	Modal modal = Modal.create("weather", "Weather").addComponents(ActionRow.of(city)).build();
-	slashEvent.replyModal(modal).queue();}
+	event.replyModal(modal).queue();}
 
     private Integer parseWeather(String JsonString) {
 	String json = JsonString;

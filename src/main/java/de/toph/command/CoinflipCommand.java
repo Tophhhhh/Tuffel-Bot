@@ -25,8 +25,7 @@ public class CoinflipCommand extends AbstractCommand {
      * @param event
      */
     @Override
-    protected void runSlashCommand(Object event) {
-	SlashCommandInteractionEvent slashEvent = (SlashCommandInteractionEvent) event;
+    protected void runSlashCommand(SlashCommandInteractionEvent event) {
 	Random r = new Random();
 	int value = r.nextInt(2);
 	String result = value == 1 ? "Head" : "Tail";
@@ -36,8 +35,8 @@ public class CoinflipCommand extends AbstractCommand {
 	eb.setTitle("Head or Tail");
 	eb.setColor(Color.yellow);
 	eb.addField(String.format("Das Ergebnis ist: %s", result),"",false);
-	eb.setFooter(String.format("%s hat eine Sucht", slashEvent.getUser().getAsTag()));
+	eb.setFooter(String.format("%s hat eine Sucht", event.getUser().getAsTag()));
 	
-	slashEvent.replyEmbeds(eb.build()).queue();
+	event.replyEmbeds(eb.build()).queue();
     }
 }
