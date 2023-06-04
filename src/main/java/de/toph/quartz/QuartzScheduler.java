@@ -1,5 +1,6 @@
 package de.toph.quartz;
 
+import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -21,7 +22,10 @@ public class QuartzScheduler {
     public void init() throws SchedulerException {
 	Trigger triggerNew = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
 		.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
-
+	
+	Trigger triggerCron = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
+		.withSchedule(CronScheduleBuilder.cronSchedule("0 0/2 8-17 * * ?")).build();
+	
 	JobDetail jobInstance = JobBuilder.newJob(TestJob.class).withIdentity("NameOfJob","NameOfGroup").build();
 	
 	scheduler.scheduleJob(jobInstance, triggerNew);

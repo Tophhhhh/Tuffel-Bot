@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import de.toph.command.CoinflipCommand;
 import de.toph.command.ICommand;
 import de.toph.command.MoveallCommand;
-import de.toph.command.PollCommand;
 import de.toph.command.VerifyCommand;
 import de.toph.command.WeatherCommand;
 import de.toph.constant.CommandConstant;
@@ -36,7 +35,7 @@ public class CommandListener extends ListenerAdapter {
 	commandList.put(CommandConstant.MOVEALLCOMMAND, new MoveallCommand());
 	commandList.put(CommandConstant.VERIFYCOMMAND, new VerifyCommand());
 	commandList.put(CommandConstant.WEATHERCOMMAND, new WeatherCommand());
-	commandList.put(CommandConstant.POLLCOMMAND, new PollCommand());
+//	commandList.put(CommandConstant.POLLCOMMAND, new PollCommand());
     }
     
     /**

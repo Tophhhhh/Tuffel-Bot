@@ -33,7 +33,7 @@ public class WeatherCommand extends AbstractCommand {
     
     @Override
     protected void runModalInteraction(ModalInteractionEvent event) {
-	String city = event.getValue("weatercity").getAsString();
+	String city = event.getValue("weathercity").getAsString();
 	
 	try {
 	    String json = doRequest(city);
@@ -55,7 +55,7 @@ public class WeatherCommand extends AbstractCommand {
 
     @Override
     protected void runSlashCommand(SlashCommandInteractionEvent event) {
-	TextInput city = TextInput.create("weatercity", "Stadt", TextInputStyle.SHORT).setPlaceholder("City")
+	TextInput city = TextInput.create("weathercity", "Stadt", TextInputStyle.SHORT).setPlaceholder("City")
 		.setMinLength(2).setMaxLength(40).build();
 
 	Modal modal = Modal.create("weather", "Weather").addComponents(ActionRow.of(city)).build();

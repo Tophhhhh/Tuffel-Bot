@@ -35,7 +35,7 @@ public class CoinflipCommand extends AbstractCommand {
 	eb.setTitle("Head or Tail");
 	eb.setColor(Color.yellow);
 	eb.addField(String.format("Das Ergebnis ist: %s", result),"",false);
-	eb.setFooter(String.format("%s hat eine Sucht", event.getUser().getAsTag()));
+	eb.setFooter(String.format("%s hat eine Sucht", event.getUser().getName()));
 	
 	event.replyEmbeds(eb.build()).queue();
     }

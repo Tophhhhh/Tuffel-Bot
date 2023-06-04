@@ -33,6 +33,11 @@ public class Config {
 	}
     }
     
+    /**
+     * get the instance of config
+     * 
+     * @return Config
+     */
     public static Config getInstance() {
 	if(INSTANCE == null) {
 	    INSTANCE = new Config();
@@ -49,7 +54,7 @@ public class Config {
     // D B - P A T H
     
     public String getDbPath() {
-        return prop.getProperty("db.connection");
+        return prop.getProperty("bot.db.connection");
     }
     
     // W E A T H E R - K E Y
