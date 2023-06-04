@@ -46,7 +46,7 @@ public class PollCommand extends AbstractCommand {
 	eb.addField("Abgelehnt", "-", true);
 	eb.addField("Fragezeichen", "-", true);
 	
-	eb.setFooter(event.getUser().getAsTag());
+	eb.setFooter(event.getUser().getName());
 	
 	event.replyEmbeds(eb.build()).queue();
     }

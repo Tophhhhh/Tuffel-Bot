@@ -59,7 +59,8 @@ public class WeatherCommand extends AbstractCommand {
 		.setMinLength(2).setMaxLength(40).build();
 
 	Modal modal = Modal.create("weather", "Weather").addComponents(ActionRow.of(city)).build();
-	event.replyModal(modal).queue();}
+	event.replyModal(modal).queue();
+    }
 
     private Integer parseWeather(String JsonString) {
 	String json = JsonString;
