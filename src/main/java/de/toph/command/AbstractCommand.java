@@ -18,7 +18,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
  *
  * Abstact command
  */
-public class AbstractCommand implements ICommand {
+public abstract class AbstractCommand implements ICommand {
     
     private final Logger logger = LoggerFactory.getLogger(AbstractCommand.class);
 
