@@ -23,13 +23,16 @@ public class MessageTask implements Job {
     
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
+	LOGGER.info("test");
 	
 	try {
-	    Guild guild = DiscordBot.getInstance().getJda().getGuildById("");
+//	    Guild guild = DiscordBot.getInstance().getJda().getGuildById("690294066990415893"); NMCE
+	    Guild guild = DiscordBot.getInstance().getJda().getGuildById("702995451242086442");
 	    if(guild != null){
-		TextChannel tc = guild.getTextChannelById("");
+//		TextChannel tc = guild.getTextChannelById("1006268808681488587"); NMCE
+		TextChannel tc = guild.getTextChannelById("903670109619503114");
 		if(tc != null) {
-		    tc.sendMessage("dummy");
+		    tc.sendMessage("dummy").queue();
 		}
 	    }
 	} catch (LoginException e) {

@@ -46,8 +46,8 @@ public class CoinflipCommand extends AbstractCommand {
 	eb.setColor(Color.yellow);
 	eb.addField(String.format("Das Ergebnis ist: %s", result),"",false);
 	eb.setFooter(String.format("%s | %s hat eine Sucht", guild.getName(), user.getName()), guild.getIconUrl());
-	eb.setImage("attachment://Head.png");
+	eb.setImage("attachment://placeholder.png");
 	
-	event.replyFiles(FileUpload.fromData(is, "Head.png")).setEmbeds(eb.build()).queue();
+	event.replyFiles(FileUpload.fromData(is, "placeholder.png")).setEmbeds(eb.build()).queue();
     }
 }

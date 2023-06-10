@@ -5,7 +5,6 @@ import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
@@ -20,15 +19,25 @@ public class QuartzScheduler {
     }
     
     public void init() throws SchedulerException {
-	Trigger triggerNew = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
-		.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
+//	Trigger triggerNew = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
+//		.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever()).build();
+//	
+//	
+//	// Pattern Sec, Min, Hour, day, month, dayofweek
+//	Trigger triggerCron = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
+//		.withSchedule(CronScheduleBuilder.cronSchedule("0 0 17 * * SAT,SUN")).build();
+//	// 00 17 * * SAT,SUN
 	
-	Trigger triggerCron = TriggerBuilder.newTrigger().withIdentity("NameOfTrigger","NameOfGroup")
-		.withSchedule(CronScheduleBuilder.cronSchedule("0 0/2 8-17 * * ?")).build();
+	Trigger caligor = TriggerBuilder.newTrigger().withIdentity("caligor","nostale")
+//		.withSchedule(CronScheduleBuilder.cronSchedule("0 0 17 * * SAT,SUN")).build();
+	.withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?")).build();
 	
-	JobDetail jobInstance = JobBuilder.newJob(TestJob.class).withIdentity("NameOfJob","NameOfGroup").build();
+//	JobDetail jobInstance = JobBuilder.newJob(TestJob.class).withIdentity("NameOfJob","NameOfGroup").build();
 	
-	scheduler.scheduleJob(jobInstance, triggerNew);
+	JobDetail caligorInstance = JobBuilder.newJob(MessageTask.class).withIdentity("caligor", "nostale").build();
+	
+//	scheduler.scheduleJob(jobInstance, triggerNew);
+	scheduler.scheduleJob(caligorInstance, caligor);
     }
     
     public void stop() throws SchedulerException {

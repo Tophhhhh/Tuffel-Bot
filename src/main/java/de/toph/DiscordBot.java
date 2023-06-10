@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import de.toph.constant.CommandConstant;
 import de.toph.database.LiteSQL;
 import de.toph.listener.CommandListener;
+import de.toph.quartz.QuartzScheduler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -37,6 +38,8 @@ public class DiscordBot {
     private JDABuilder builder;
 
     private JDA jda;
+    
+    private QuartzScheduler scheduler;
 
     /**
      * the instance of Discord bot
@@ -58,6 +61,7 @@ public class DiscordBot {
      */
     public void execute(String[] args) {
 	Config conf = Config.getInstance();
+	scheduler = new QuartzScheduler();
 	
 	LiteSQL.connect(conf.getDbPath());
 
@@ -69,6 +73,12 @@ public class DiscordBot {
 	jda = builder.build();
 	jda.updateCommands().addCommands(commands()).queue();
 	LOGGER.info("Bot started!!");
+//	try {
+//	    scheduler.start();
+//	    scheduler.init();
+//	} catch (SchedulerException e) {
+//	    e.printStackTrace();
+//	}
     }
 
     /**
