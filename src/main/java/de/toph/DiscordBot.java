@@ -38,7 +38,7 @@ public class DiscordBot {
     private JDABuilder builder;
 
     private JDA jda;
-    
+
     private QuartzScheduler scheduler;
 
     /**
@@ -62,14 +62,15 @@ public class DiscordBot {
     public void execute(String[] args) {
 	Config conf = Config.getInstance();
 	scheduler = new QuartzScheduler();
-	
+
 	LiteSQL.connect(conf.getDbPath());
 
-	builder = JDABuilder.createDefault(conf.getKey()).enableIntents(EnumSet.allOf(GatewayIntent.class));
-	builder.setActivity(Activity.playing("Disco Party Sahne"));
-	builder.setStatus(OnlineStatus.ONLINE);
-	builder.addEventListeners(new CommandListener());
-	
+	builder = JDABuilder.createDefault(conf.getKey())
+		.enableIntents(EnumSet.allOf(GatewayIntent.class))
+		.setActivity(Activity.playing("Disco Party Sahne"))
+		.setStatus(OnlineStatus.ONLINE)
+		.addEventListeners(new CommandListener());
+
 	jda = builder.build();
 	jda.updateCommands().addCommands(commands()).queue();
 	LOGGER.info("Bot started!!");
@@ -96,22 +97,19 @@ public class DiscordBot {
 
 	// Coin flip command
 
-	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!")
-		.setGuildOnly(true));
+	commandlist.add(Commands.slash(CommandConstant.COINFLIPCOMMAND, "play coinflip!").setGuildOnly(true));
 
 	// Weather command
-	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather")
-		.setGuildOnly(true));
-	
+	commandlist.add(Commands.slash(CommandConstant.WEATHERCOMMAND, "get Weather").setGuildOnly(true));
+
 	// Poll command currently disabled
 //	commandlist.add(Commands.slash(CommandConstant.POLLCOMMAND, "create poll")
 //		.addOption(OptionType.STRING, "question", "set a question")
 //		.setGuildOnly(true));
 
-
 	return commandlist;
     }
-    
+
     /**
      * get Builder
      * 

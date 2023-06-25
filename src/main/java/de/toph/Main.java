@@ -19,9 +19,6 @@ public class Main {
     public static void main(String[] args) {
 	try {
 	    DiscordBot.getInstance().execute(args);
-//	    Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-//	    scheduler.start();
-//	    scheduler.shutdown();
 	} catch (LoginException e) {
 	    logger.error(e.getMessage(), e);
 	}
