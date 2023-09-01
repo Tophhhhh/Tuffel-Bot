@@ -58,15 +58,6 @@
 			<version>20230227</version>
 		</dependency>
 	</dependencies>
-
-	<distributionManagement>
-	   <repository>
-	     <id>github</id>
-	     <name>Tophhhhh</name>
-	     <url>https://maven.pkg.github.com/Tophhhhh/Discord-Bot</url>
-	   </repository>
-	</distributionManagement>
-
 	
 	<build>
 		<plugins>
