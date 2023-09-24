@@ -11,9 +11,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 /**
- * 
  * @author Tophhhhh
- *
  */
 public class PollCommand extends AbstractCommand {
 
@@ -21,33 +19,33 @@ public class PollCommand extends AbstractCommand {
 
     @Override
     protected void runButtonCommand(ButtonInteractionEvent event) {
-	// TODO Auto-generated method stub
-	
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     protected void runSlashCommand(SlashCommandInteractionEvent event) {
-	
-	OptionMapping omQuestion = event.getOption("question");
-	if(omQuestion == null) {
-	    event.reply("Bitte eine Frage eingeben!").setEphemeral(false).queue();
-	    return;
-	}
-	
-	String question = omQuestion.getAsString();
-	
-	EmbedBuilder eb = new EmbedBuilder();
-	eb.setAuthor(event.getUser().getName());
-	eb.setTitle("Umfrage");
-	eb.setColor(Color.CYAN);
-	eb.setDescription(question);
-	
-	eb.addField("Aktzeptiert", "-", true);
-	eb.addField("Abgelehnt", "-", true);
-	eb.addField("Fragezeichen", "-", true);
-	
-	eb.setFooter(event.getUser().getName());
-	
-	event.replyEmbeds(eb.build()).queue();
+
+        OptionMapping omQuestion = event.getOption("question");
+        if (omQuestion == null) {
+            event.reply("Bitte eine Frage eingeben!").setEphemeral(false).queue();
+            return;
+        }
+
+        String question = omQuestion.getAsString();
+
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setAuthor(event.getUser().getName());
+        eb.setTitle("Umfrage");
+        eb.setColor(Color.CYAN);
+        eb.setDescription(question);
+
+        eb.addField("Aktzeptiert", "-", true);
+        eb.addField("Abgelehnt", "-", true);
+        eb.addField("Fragezeichen", "-", true);
+
+        eb.setFooter(event.getUser().getName());
+
+        event.replyEmbeds(eb.build()).queue();
     }
 }

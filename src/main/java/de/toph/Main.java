@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
  */
 public class Main {
 
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 	try {
 	    DiscordBot.getInstance().execute(args);
 	} catch (LoginException e) {
-	    logger.error(e.getMessage(), e);
+	    LOGGER.error(e.getMessage(), e);
 	}
     }
 
