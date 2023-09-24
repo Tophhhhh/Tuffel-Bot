@@ -4,9 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
  * @author Tophhhhh
- * 
+ * <p>
  * service class
  */
 public class ServiceImpl implements IService {

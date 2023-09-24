@@ -6,13 +6,13 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestJob implements Job{
+public class TestJob implements Job {
 
-    private Logger logger = LoggerFactory.getLogger(TestJob.class);
-    
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestJob.class);
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-	logger.debug("test");
+        LOGGER.debug("test");
     }
 
 }
