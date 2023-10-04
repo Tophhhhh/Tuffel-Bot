@@ -1,5 +1,7 @@
 # Tuffel - Discord Bot
 
+- [Social Media](#social-media-links)
+
 # Commands
 
 ## Slash-Commands
