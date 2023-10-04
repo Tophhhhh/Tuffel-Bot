@@ -25,7 +25,7 @@
 # Additional
 
 # Social Media Links
-- Discord : **Toph#3300**
+- Discord : **Txph**
 - homepage : /
 
 **Work in progress**
