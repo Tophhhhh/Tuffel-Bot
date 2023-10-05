@@ -10,3 +10,9 @@ Maven
 
 # Contact
 Discord : Txph
+
+# Contributors
+
+<a href="https://github.com/Tophhhhh/Tuffel-Bot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Tophhhhh/Tuffel-Bot&max=400&columns=20" />
+</a>
