@@ -1,11 +1,15 @@
 # Tuffel-Bot
 Created with JDA (Java Discord API)
+
+## Agenda
 - [Set-Up](#set-up)
+- [Contact](#contact)
+- [Contributors](#contributors)
 
 # Set-Up
 Maven
 ```Maven
-[Insert your text]
+<Setup>
 ```
 
 # Contact
