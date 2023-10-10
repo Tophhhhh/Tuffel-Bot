@@ -1,5 +1,8 @@
 # Tuffel - Discord Bot
 
+## Agenda
+- [Commands](#commands)
+- [Additional](#additional)
 - [Social Media](#social-media-links)
 
 # Commands
