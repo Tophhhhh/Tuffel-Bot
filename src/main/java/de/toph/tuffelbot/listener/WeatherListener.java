@@ -17,7 +17,7 @@ import java.util.Objects;
 @Component
 public class WeatherListener extends AbstractCommandListener {
 
-	private static final String WEATHER = "weather";
+	private final String WEATHER = "weather";
 
 	private WeatherService weatherService;
 
@@ -28,7 +28,7 @@ public class WeatherListener extends AbstractCommandListener {
 
 	@Override
 	public CommandData getCommandData() {
-		return Commands.slash(WEATHER, "dummy");
+		return Commands.slash(WEATHER, "Zeigt das Wetter in der angegebenen Stadt an.");
 	}
 
 	@Override
