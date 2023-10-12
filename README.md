@@ -7,12 +7,22 @@ Created with JDA (Java Discord API)
 - [Contributors](#contributors)
 
 # Set-Up
-Maven
+ Maven
 ```Maven
-<Setup>
+<dependency>
+  <groupId>PLACEHOLDER</groupId>
+  <artifactId>PLACEHOLDER</artifactdId>
+  <version>PLACEHOLDER</version>
+</dependency>
+```
+
+Docker
+```Docker
+PLACEHOLDER
 ```
 
 # Contact
+Website: PLACEHOLDER
 Discord : Txph
 
 # Contributors
