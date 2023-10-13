@@ -8,7 +8,7 @@ Created with JDA (Java Discord API)
 
 # Set-Up
  Maven
-```Maven
+```xml
 <dependency>
   <groupId>PLACEHOLDER</groupId>
   <artifactId>PLACEHOLDER</artifactdId>
@@ -17,7 +17,7 @@ Created with JDA (Java Discord API)
 ```
 
 Docker
-```Docker
+```bash
 PLACEHOLDER
 ```
 
