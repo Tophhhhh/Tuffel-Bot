@@ -16,6 +16,11 @@ Created with JDA (Java Discord API)
 </dependency>
 ```
 
+Gradle
+```gradle
+implementation group: 'PLACEHOLDER', name: 'PLACEHOLDER', version: 'PLACEHOLDER'
+```
+
 Docker
 ```bash
 PLACEHOLDER
@@ -23,6 +28,7 @@ PLACEHOLDER
 
 # Contact
 Website: PLACEHOLDER
+
 Discord : Txph
 
 # Contributors
